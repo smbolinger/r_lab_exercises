@@ -1,0 +1,292 @@
+Date,Initials,Latitude,Longitude,Tree Distance,Shrub Distance,Building Distance,Road Distance,Water Distance,Habitat Type,Temp (C),Wind Speed (km/hr),Cloud Cover (%),Start Time,# Cats,# Humans,# Cars,Bird Species,Number,Sex,Bird Distance,Minute,Notes
+2/27/2023,"OS, OL, ZL, EO ",30.21416243,-92.0216784,8,7,23.2,17.1,334,Open,22.2,22.5,73,6:35,0,3,On busy street,American Crow,3,UNK,flyover,0,flyover
+2/27/2023,"OS, OL, ZL, EO ",30.21416243,-92.0216784,8,7,23.2,17.1,334,Open,22.2,22.5,73,6:35,0,3,On busy street,Snowy Egret,12,UNK,flyover,1,flyover
+2/27/2023,"OS, OL, ZL, EO ",30.21416243,-92.0216784,8,7,23.2,17.1,334,Open,22.2,22.5,73,6:35,0,3,On busy street,European Starling,3,UNK,27,5,
+2/27/2023,"OS, OL, ZL, EO ",30.21416243,-92.0216784,8,7,23.2,17.1,334,Open,22.2,22.5,73,6:35,0,3,On busy street,Cedar Waxwing,1,UNK,20,6,
+2/27/2023,"OS, OL, ZL, EO ",30.21416243,-92.0216784,8,7,23.2,17.1,334,Open,22.2,22.5,73,6:35,0,3,On busy street,Blue Jay,1,UNK,30,7,
+2/27/2023,"OS, OL, ZL, EO ",30.21416243,-92.0216784,8,7,23.2,17.1,334,Open,22.2,22.5,73,6:35,0,3,On busy street,Common Grackle,1,UNK,flyover,8,flyover
+2/27/2023,"OS, OL, ZL, EO ",30.21416243,-92.0216784,8,7,23.2,17.1,334,Open,22.2,22.5,73,6:35,0,3,On busy street,Carolina Wren,1,UNK,35,10,
+2/27/2023,"OS, OL, ZL, EO ",30.21175413,-92.01452231,6,1,6.7,1.8,341,Residential,22.2,19.3,50,7:14,0,2,On busy street,Fish Crow,2,UNK,30,1,
+2/27/2023,"OS, OL, ZL, EO ",30.21175413,-92.01452231,6,1,6.7,1.8,341,Residential,22.2,19.3,50,7:14,0,2,On busy street,Downy Woodpecker,1,UNK,15,3,
+2/27/2023,"OS, OL, ZL, EO ",30.21175413,-92.01452231,6,1,6.7,1.8,341,Residential,22.2,19.3,50,7:14,0,2,On busy street,American Robin,1,UNK,22,4,
+2/27/2023,"OS, OL, ZL, EO ",30.21175413,-92.01452231,6,1,6.7,1.8,341,Residential,22.2,19.3,50,7:14,0,2,On busy street,Blue Jay,1,UNK,55,7,
+2/27/2023,"OS, OL, ZL, EO ",30.21175413,-92.01452231,6,1,6.7,1.8,341,Residential,22.2,19.3,50,7:14,0,2,On busy street,Great Egret,1,UNK,flyover,9,flyover
+2/27/2023,"OS, OL, ZL, EO ",30.21087544,-92.01651412,7,7,1.8,38.1,278.6,Infrastructure,22.2,20.9,40,7:39,0,9,On busy street,Fish Crow,6,UNK,flyover,0,flyover
+2/27/2023,"OS, OL, ZL, EO ",30.21087544,-92.01651412,7,7,1.8,38.1,278.6,Infrastructure,22.2,20.9,40,7:39,0,9,On busy street,Blue Jay,2,UNK,50,4,
+2/27/2023,"OS, OL, ZL, EO ",30.21087544,-92.01651412,7,7,1.8,38.1,278.6,Infrastructure,22.2,20.9,40,7:39,0,9,On busy street,Northern Cardinal ,1,UNK,20,4,vocalizing a lot
+2/27/2023,"OS, OL, ZL, EO ",30.21087544,-92.01651412,7,7,1.8,38.1,278.6,Infrastructure,22.2,20.9,40,7:39,0,9,On busy street,Yellow-rumped Warbler,1,UNK,6,9,
+2/27/2023,"DA,AF,HJ",30.214278,-92.0185,4.5,10,2.3,0.5,40.8,Infrastructure,21.1,22.5,80,6:35,0,3,7,Red-winged Blackbird,200,UNK,40,0,group vocalization at cypress lake
+2/27/2023,"DA,AF,HJ",30.214278,-92.0185,4.5,10,2.3,0.5,40.8,Infrastructure,21.1,22.5,80,6:35,0,3,7,House Sparrow,20,UNK,flyover,3,Flyover
+2/27/2023,"DA,AF,HJ",30.214278,-92.0185,4.5,10,2.3,0.5,40.8,Infrastructure,21.1,22.5,80,6:35,0,3,7,Common Grackle,2,UNK,flyover,3,Flyover
+2/27/2023,"DA,AF,HJ",30.214278,-92.0185,4.5,10,2.3,0.5,40.8,Infrastructure,21.1,22.5,80,6:35,0,3,7,American Robin,1,UNK,27,3,In tree across the road near cypress lake 
+2/27/2023,"DA,AF,HJ",30.214278,-92.0185,4.5,10,2.3,0.5,40.8,Infrastructure,21.1,22.5,80,6:35,0,3,7,House Sparrow,6,UNK,flyover,7,Flyover
+2/27/2023,"DA,AF,HJ",30.214278,-92.0185,4.5,10,2.3,0.5,40.8,Infrastructure,21.1,22.5,80,6:35,0,3,7,Common Grackle,3,UNK,flyover,9,Flyover
+2/27/2023,"DA,AF,HJ",30.214278,-92.0185,4.5,10,2.3,0.5,40.8,Infrastructure,21.1,22.5,80,6:35,0,3,7,Great Egret,1,UNK,flyover,9,Flyover
+2/27/2023,"DA,AF,HJ",30.214278,-92.0185,4.5,10,2.3,0.5,40.8,Infrastructure,21.1,22.5,80,6:35,0,3,7,Mourning Dove,1,UNK,NA,9,Heard calling 
+2/27/2023,"DA,AF,HJ",30.214278,-92.0185,4.5,10,2.3,0.5,40.8,Infrastructure,21.1,22.5,80,6:35,0,3,7,Great Egret,1,UNK,NA,9.5,Flyover 
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Great Egret,1,UNK,NA ,1,Flyover
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Blue Jay,1,UNK,NA,3,Vocalizing - Location Uknown 
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Great Blue Heron,2,UNK,NA,3,Flyover 
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Carolina Wren,1,UNK,NA,4,Vocalizing - Location Uknown 
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Great Egret,2,UNK,NA,4.5,Flyover
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Common Grackle,5,UNK,NA,5,Flyover
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,House Sparrow,1,UNK,NA,5,Flyover
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Carolina Chickadee,1,UNK,NA ,6,Vocalizing - Location Uknown 
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Blue Jay,1,UNK,NA,7,Vocalizing - Location Uknown 
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Mockingbird,1,UNK,NA,7,Vocalizing across the street 
+2/27/2023,"DA,AF,HJ",30.215333,-92.016889,5.7,3.4,2.8,11,142,Urban Forrest ,21.1,22.5,40,6:56,0,6,On busy road,Cedar Waxwing ,1,UNK,NA,9,Vocalizing 
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Fish Crow,1,UNK,NA,1,Flyover
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,American Robin,1,M,1.2,2,Signaling to female
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Mourning Dove,1,UNK,NA,2,Vocalizing- Location Unknown 
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Northern Cardinal ,1,UNK,NA,2,Vocalizing- Location Unknown 
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,American Robin ,1,F,3,2,Watching male 
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Blue Jay,1,UNK,flyover,3,Flyover
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Chickadee,1,UNK,flyover,4,Flyover
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Carolina Wren,1,UNK,flyover,5,Flyover
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,House Sparrow,4,UNK,flyover,5,In trees
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Northern Cardinal ,1,M,flyover,5,In trees
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Common Grackle,1,UNK,flyover,6.5,Flyover
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Mourning Dove,1,UNK,flyover,7,Flyover
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Great Egret,1,UNK,flyover,7,Flyover
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,House Sparrow,20,UNK,flyover,9,Flyover
+2/27/2023,"DA,AF,HJ",30.211028,-92.019889,1,30.5,1.2,123,1143,Urban,21.6,20.9,60,7:22,0,9,8,Great Egret,1,UNK,flyover,9.5,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Cooper's Hawk,1,UNK,100,0.05,Perched on building
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Common Grackle,20,UNK,flyover,2,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Great Egret,1,UNK,flyover,1,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Common Grackle,1,UNK,flyover,3.5,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Cedar Waxwing,1,UNK,flyover,3.5,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Common Grackle,15,UNK,flyover,3.5,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Mourning Dove,1,UNK,flyover,6,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Brown-headed Cowbird,10,UNK,flyover,6,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Common Grackle,30,UNK,flyover,7,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Crow (not sure exact species),1,UNK,flyover,7.5,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12525,92.01118,500,500,90,120,0,Urban,21.6,22.5,60,6:40,0,3,0,Mourning Dove,2,UNK,flyover,8,Flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12374,92.00586,5,5,10,5,1000,Urban,21.6,22.5,60,7:05,0,1,89,American Crow,1,UNK,15,1,Perched on stoplight
+2/27/2023,"CD,AC,CH,CC,JR",30.12374,92.01118,5,5,10,5,1000,Urban,21.6,22.5,60,7:05,0,1,89,American Robin,2,UNK,7,0.5,on the ground
+2/27/2023,"CD,AC,CH,CC,JR",30.12374,92.01118,5,5,10,5,1000,Urban,21.6,22.5,60,7:05,0,1,89,Carolina Wren,2,UNK,flyover,0.5,flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12374,92.01118,5,5,10,5,1000,Urban,21.6,22.5,60,7:05,0,1,89,Common Grackle,2,UNK,flyover,5,flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12374,92.01118,5,5,10,5,1000,Urban,21.6,22.5,60,7:05,0,1,89,Cedar Waxwing,4,UNK,flyover,6,flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12374,92.01118,5,5,10,5,1000,Urban,21.6,22.5,60,7:05,0,1,89,Northern Cardinal ,1,Female,flyover,8,flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12374,92.01118,5,5,10,5,1000,Urban,21.6,22.5,60,7:05,0,1,89,Tufted Titmouse ,1,UNK,20,9.5,perched on tree
+2/27/2023,"CD,AC,CH,CC,JR",30.12351,92.01041,15,50,100,25,600,Urban,21.6,22.5,60,7:25,0,25,69,Northern Cardinal ,1,UNK,flyover,0.5,flyover
+2/27/2023,"CD,AC,CH,CC,JR",30.12351,92.01041,15,50,100,25,600,Urban,21.6,22.5,60,7:25,0,25,69,Red-bellied Woodpecker,1,UNK,70,1.5,in tree
+2/27/2023,"CD,AC,CH,CC,JR",30.12351,92.01041,15,50,100,25,600,Urban,21.6,22.5,60,7:25,0,25,69,American Robin,3,UNK,20,2,on ground together
+2/27/2023,"CD,AC,CH,CC,JR",30.12351,92.01041,15,50,100,25,600,Urban,21.6,22.5,60,7:25,0,25,69,Collared Dove,1,UNK,40,2.5,
+2/27/2023,"CD,AC,CH,CC,JR",30.12351,92.01041,15,50,100,25,600,Urban,21.6,22.5,60,7:25,0,25,69,Common Grackle,25,UNK,75,3,
+2/27/2023,"CD,AC,CH,CC,JR",30.12351,92.01041,15,50,100,25,600,Urban,21.6,22.5,60,7:25,0,25,69,White-winged Dove,1,UNK,50,3,saw fly by
+2/23/2023,"CD,AC,CH,CC,JR",30.12351,92.01041,15,50,100,25,600,Urban,21.6,22.5,60,7:25,0,25,69,American Robin,2,UNK,35,5,
+2/27/2023,"CD,AC,CH,CC,JR",30.12351,92.01041,15,50,100,25,600,Urban,21.6,22.5,60,7:25,0,25,69,Blue Jay,1,UNK,60,6,
+2/27/2023,"AA,BS,SS,DT",30.2118,92.01711,5,10,5,5,500,Urban Forest ,22.2,22.5,50,7:02,0,11,51,American Robin ,2,UNK ,10,0,Calling 
+2/27/2023,"AA,BS,SS,DT",30.2118,92.01711,5,10,5,5,500,Urban Forest ,22.2,22.5,50,7:02,0,11,51,Yellow-rumped Warbler,1,NA,5,1,
+2/27/2023,"AA,BS,SS,DT",30.2118,92.01711,5,10,5,5,500,Urban Forest ,22.2,22.5,50,7:02,0,11,51,Blue Jay,1,male ,15,3,Perched on powerline 
+2/27/2023,"AA,BS,SS,DT",30.2118,92.01711,5,10,5,5,500,Urban Forest ,22.2,22.5,50,7:02,0,11,51,Northern Cardinal,3,,10,3,Calling between trees
+2/27/2023,"AA,BS,SS,DT",30.2118,92.01711,5,10,5,5,500,Urban Forest ,22.2,22.5,50,7:02,0,11,51,Great Blue Heron,1,NA,flyover,4,Flying over 
+2/27/2023,"AA,BS,SS,DT",30.2118,92.01711,5,10,5,5,500,Urban Forest ,22.2,22.5,50,7:02,0,11,51,White-winged Dove,1,NA,20,6,
+2/27/2023,"AA,BS,SS,DT",30.21071,92.05185,0,15,5,5,500,Urban Forest ,22.2,22.5,50,7:29,0,7,100,Northern Cardinal ,1,NA,NA,0,Calling
+2/27/2023,"AA,BS,SS,DT",30.21071,92.05185,0,15,5,5,500,Urban Forest ,22.2,22.5,50,7:29,0,7,100,Yellow-rumped Warbler,2,NA,5,3,Perched in tree
+2/27/2023,"AA,BS,SS,DT",30.21071,92.05185,0,15,5,5,500,Urban Forest ,22.2,22.5,50,7:29,0,7,100,American Crow,1,NA,flyover,2,Flyover 
+2/27/2023,"AA,BS,SS,DT",30.21071,92.05185,0,15,5,5,500,Urban Forest ,22.2,22.5,50,7:29,0,7,100,Fish Crow ,1,NA,flyover,8,Flyover 
+2/27/2023,"AA,BS,SS,DT",30.21071,92.05185,0,15,5,5,500,Urban Forest ,22.2,22.5,50,7:29,0,7,100,Blue Jay,1,NA,20,3,Calling
+2/27/2023,"AA,BS,SS,DT",30.21126,92.02231,5,5,5,5,500,Urban ,22.2,22.5,80,7:58,0,33,10,Great Blue Heron,2,NA,flyover,0,Flyover 
+2/27/2023,"AA,BS,SS,DT",30.21126,92.02231,5,5,5,5,500,Urban ,22.2,22.5,80,7:58,0,33,10,Northern Cardinal ,2,M,15,1,Perched on powerline
+2/27/2023,"AA,BS,SS,DT",30.21126,92.02231,5,5,5,5,500,Urban ,22.2,22.5,80,7:58,0,33,10,Blue Jay,2,M,15,1,Flying from tree to tree
+2/27/2023,"AA,BS,SS,DT",30.21126,92.02231,5,5,5,5,500,Urban ,22.2,22.5,80,7:58,0,33,10,Tree Swallow,1,NA,flyover,5,Flyover 
+2/27/2023,"AA,BS,SS,DT",30.21126,92.02231,5,5,5,5,500,Urban ,22.2,22.5,80,7:58,0,33,10,White-winged Dove,1,NA,20,7,
+3/11/2023,ZL,30.22018,93.21501,2,3,5,0,1,Open,17.7,6.4,100,6:01,0,0,3,Mallard,2,"M,F",2,0,
+3/11/2023,ZL,30.22018,93.21501,2,3,5,0,1,Open,17.7,6.4,100,6:01,0,0,3,Northern Cardinal ,1,UNK,10,1,
+3/11/2023,ZL,30.22018,93.21501,2,3,5,0,1,Open,17.7,6.4,100,6:01,0,0,3,Northern Mockingbird,1,UNK,12,2,
+3/11/2023,ZL,30.22018,93.21501,2,3,5,0,1,Open,17.7,6.4,100,6:01,0,0,3,Carolina Wren,1,UNK,8,4,
+3/11/2023,ZL,30.22018,93.21501,2,3,5,0,1,Open,17.7,6.4,100,6:01,0,0,3,American Robin,1,UNK,5,4,
+3/11/2023,ZL,30.22018,93.21501,2,3,5,0,1,Open,17.7,6.4,100,6:01,0,0,3,White-winged Dove,1,UNK,15,6,
+3/11/2023,ZL,30.22018,93.21501,2,3,5,0,1,Open,17.7,6.4,100,6:01,0,0,3,Blue Jay,1,UNK,8,9,
+3/11/2023,ZL,30.23192,93.22109,2,2,8,0,5,Shoreline,17.7,4.8,100,6:18,0,1,4,American Coot,20,UNK,5,0,
+3/11/2023,ZL,30.23192,93.22109,2,2,8,0,5,Shoreline,17.7,4.8,100,6:18,0,1,4,Laughing Gull,15,UNK,10,1,
+3/11/2023,ZL,30.23192,93.22109,2,2,8,0,5,Shoreline,17.7,4.8,100,6:18,0,1,4,Muscovy Duck,4,UNK,3,3,
+3/11/2023,ZL,30.23192,93.22109,2,2,8,0,5,Shoreline,17.7,4.8,100,6:18,0,1,4,Common Grackle,1,UNK,5,4,
+3/11/2023,ZL,30.23192,93.22109,2,2,8,0,5,Shoreline,17.7,4.8,100,6:18,0,1,4,Canada Goose,1,UNK,12,6,
+3/11/2023,ZL,30.23192,93.22109,2,2,8,0,5,Shoreline,17.7,4.8,100,6:18,0,1,4,Snow Goose,1,UNK,4,7,Not sure about ID
+3/11/2023,ZL,30.23192,93.22109,2,2,8,0,5,Shoreline,17.7,4.8,100,6:18,0,1,4,Yellow-rumped Warbler,1,UNK,2,8,
+3/11/2023,ZL,30.23613,93.237,3,500,30,0,18,Shoreline,17.7,6.4,100,6:30,0,2,30,Laughing Gull,18,UNK,0,0,
+3/11/2023,ZL,30.23613,93.237,3,500,30,0,18,Shoreline,17.7,6.4,100,6:30,0,2,30,Canada Goose,20,UNK,2,2,
+3/11/2023,ZL,30.21572,93.22867,1.5,3,14,2,30,Urban Forest ,17.2,8.04,100,6:47,0,0,6,White-winged Dove,1,UNK,21,1,
+3/11/2023,ZL,30.21572,93.22867,1.5,3,14,2,30,Urban Forest ,17.2,8.04,100,6:47,0,0,6,Northern Cardinal ,1,UNK,7,2,
+3/11/2023,ZL,30.21572,93.22867,1.5,3,14,2,30,Urban Forest ,17.2,8.04,100,6:47,0,0,6,Northern Mockingbird,1,UNK,9,4,
+3/11/2023,ZL,30.21572,93.22867,1.5,3,14,2,30,Urban Forest ,17.2,8.04,100,6:47,0,0,6,Carolina Wren,1,UNK,5,6,
+3/11/2023,ZL,30.21572,93.22867,1.5,3,14,2,30,Urban Forest ,17.2,8.04,100,6:47,0,0,6,House Finch,1,UNK,8,7,
+3/11/2023,ZL,30.21087,93.24621,4,2,30,18,1,Shoreline,17.2,6.4,100,7:07,0,0,0,Red-winged Blackbird,1,UNK,12,1,
+3/11/2023,ZL,30.21087,93.24621,4,2,30,18,1,Shoreline,17.2,6.4,100,7:07,0,0,0,Northern Cardinal ,1,M,5,1,
+3/11/2023,ZL,30.21087,93.24621,4,2,30,18,1,Shoreline,17.2,6.4,100,7:07,0,0,0,Blue Jay,1,UNK,17,1,
+3/11/2023,ZL,30.21087,93.24621,4,2,30,18,1,Shoreline,17.2,6.4,100,7:07,0,0,0,Tufted Titmouse ,1,UNK,7,5,
+3/11/2023,ZL,30.21087,93.24621,4,2,30,18,1,Shoreline,17.2,6.4,100,7:07,0,0,0,Carolina Wren,1,UNK,6,7,
+3/12/2023,ZL,30.13863,93.20989,2,5,5,10,1609.34,Infrastructure,22.2,22.5,70,7:05,0,0,50,Eastern Meadowlark,1,UNK,15,8,
+3/12/2023,ZL,30.27636,93.08583,3,5,30,20,3218.68,Urban Forest ,22.7,22.5,60,7:43,0,0,3,Northern Cardinal ,1,UNK,9,0,
+3/12/2023,ZL,30.27636,93.08583,3,5,30,20,3218.68,Urban Forest ,22.7,22.5,60,7:43,0,0,3,Carolina Wren,1,UNK,10,0,
+3/12/2023,ZL,30.27636,93.08583,3,5,30,20,3218.68,Urban Forest ,22.7,22.5,60,7:43,0,0,3,Fish Crow,1,UNK,17,1,
+3/12/2023,ZL,30.27636,93.08583,3,5,30,20,3218.68,Urban Forest ,22.7,22.5,60,7:43,0,0,3,Blue Jay,1,UNK,12,1,
+3/12/2023,ZL,30.27636,93.08583,3,5,30,20,3218.68,Urban Forest ,22.7,22.5,60,7:43,0,0,3,Yellow-rumped Warbler,1,UNK,7,1,
+3/12/2023,ZL,30.27636,93.08583,3,5,30,20,3218.68,Urban Forest ,22.7,22.5,60,7:43,0,0,3,Northern Mockingbird,2,UNK,5,4,
+3/12/2023,ZL,30.29691,93.11682,3,3,40,15,120,Shoreline,22.7,24.1,60,8:01,0,1,0,Brown-headed Cowbird,1,UNK,10,2,
+3/12/2023,ZL,30.29691,93.11682,3,3,40,15,120,Shoreline,22.7,24.1,60,8:01,0,1,0,Carolina Wren,1,UNK,13,3,
+3/12/2023,ZL,30.29691,93.11682,3,3,40,15,120,Shoreline,22.7,24.1,60,8:01,0,1,0,Blue Jay,1,UNK,18,3,
+3/12/2023,ZL,30.29691,93.11682,3,3,40,15,120,Shoreline,22.7,24.1,60,8:01,0,1,0,Northern Cardinal ,1,UNK,23,4,
+3/12/2023,ZL,30.29691,93.11682,3,3,40,15,120,Shoreline,22.7,24.1,60,8:01,0,1,0,Fish Crow,1,UNK,8,8,
+3/12/2023,ZL,30.28786,93.04913,3,9,70,5,90,Open,22.7,24.1,70,8:21,0,1,0,Eastern Meadowlark,1,UNK,6,0,
+3/12/2023,ZL,30.28786,93.04913,3,9,70,5,90,Open,22.7,24.1,70,8:21,0,1,0,Northern Mockingbird,1,UNK,10,3,
+3/12/2023,ZL,30.28786,93.04913,3,9,70,5,90,Open,22.7,24.1,70,8:21,0,1,0,Northern Cardinal ,1,UNK,10,3,
+3/12/2023,ZL,30.23927,93.01624,7,40,15,2,300,Urban Forest ,23.3,22.5,60,8:53,0,2,1,Blue Jay,2,UNK,20,0,
+3/12/2023,ZL,30.23927,93.01624,7,40,15,2,300,Urban Forest ,23.3,22.5,60,8:53,0,2,1,Common Grackle,1,UNK,5,1,
+3/12/2024,ZL,30.23927,93.01624,7,40,15,2,300,Urban Forest ,23.3,22.5,60,8:53,0,2,1,Fish Crow,1,UNK,13,2,
+3/12/2023,ZL,30.23927,93.01624,7,40,15,2,300,Urban Forest ,23.3,22.5,60,8:53,0,2,1,Cedar Waxwing,1,UNK,40,2,
+3/12/2023,ZL,30.23927,93.01624,7,40,15,2,300,Urban Forest ,23.3,22.5,60,8:53,0,2,1,House Sparrow ,1,UNK,7,3,
+3/12/2023,ZL,30.23927,93.01624,7,40,15,2,300,Urban Forest ,23.3,22.5,60,8:53,0,2,1,Red-shouldered Hawk,1,UNK,20,5,
+3/12/2023,ZL,30.23927,93.01624,7,40,15,2,300,Urban Forest ,23.3,22.5,60,8:53,0,2,1,Red-winged Blackbird,1,UNK,40,5,
+3/12/2023,ZL,30.23927,93.01624,7,40,15,2,300,Urban Forest ,23.3,22.5,60,8:53,0,2,1,Northern Mockingbird,2,UNK,12,7,
+3/25/2023,ZL,30.21966,93.21811,2,9,10,2,965.606,Open,21.67,11.27,80,6:43,0,0,1,House Sparrow,1,UNK,17,0,
+3/25/2023,ZL,30.21966,93.21811,2,9,10,2,965.606,Open,21.67,11.27,80,6:43,0,0,1,Northern Cardinal ,1,UNK,15,1,
+3/25/2023,ZL,30.21966,93.21811,2,9,10,2,965.606,Open,21.67,11.27,80,6:43,0,0,1,House Finch,1,UNK,15,3,
+3/25/2023,ZL,30.21966,93.21811,2,9,10,2,965.606,Open,21.67,11.27,80,6:43,0,0,1,Laughing Gull,6,UNK,Flyover,3,
+3/25/2023,ZL,30.21966,93.21811,2,9,10,2,965.606,Open,21.67,11.27,80,6:43,0,0,1,American Robin,1,UNK,6,4,
+3/25/2023,ZL,30.21966,93.21811,2,9,10,2,965.606,Open,21.67,11.27,80,6:43,0,0,1,Northern Mockingbird,1,UNK,10,6,
+3/25/2023,ZL,30.2188,93.20851,10,30,32,20,8,Residential,21.67,9.66,60,6:58,0,1,0,Northern Cardinal ,1,UNK,15,0,
+3/25/2023,ZL,30.2188,93.20851,10,30,32,20,8,Residential,21.67,9.66,60,6:58,0,1,0,Laughing Gull,7,UNK,Flyover,1,
+3/25/2023,ZL,30.2188,93.20851,10,30,32,20,8,Residential,21.67,9.66,60,6:58,0,1,0,House Sparrow,2,UNK,15,3,
+3/25/2023,ZL,30.22604,93.21805,2,20,20,0,482.8,Infrastructure,21.67,9.66,40,7:14,0,0,7,Laughing Gull,10,UNK,Flyover,0,
+3/25/2023,ZL,30.22604,93.21805,2,20,20,0,482.8,Infrastructure,21.67,9.66,40,7:14,0,0,7,European Starling,6,UNK,20,1,
+3/25/2023,ZL,30.22604,93.21805,2,20,20,0,482.8,Infrastructure,21.67,9.66,40,7:14,0,0,7,Northern Cardinal ,1,UNK,5,2,
+3/25/2023,ZL,30.22604,93.21805,2,20,20,0,482.8,Infrastructure,21.67,9.66,40,7:14,0,0,7,White-winged Dove,2,UNK,4,3,
+3/25/2023,ZL,30.21315,93.22214,5,5,5,8,482.8,Urban Forest ,21.67,8.05,10,7:25,1,0,0,White-winged Dove,3,UNK,7,1,
+3/25/2023,ZL,30.21315,93.22214,5,5,5,8,482.8,Urban Forest ,21.67,8.05,10,7:25,1,0,0,European Starling,5,UNK,10,1,
+3/25/2023,ZL,30.21315,93.22214,5,5,5,8,482.8,Urban Forest ,21.67,8.05,10,7:25,1,0,0,Northern Cardinal ,1,UNK,5,2,
+3/25/2023,ZL,30.21315,93.22214,5,5,5,8,482.8,Urban Forest ,21.67,8.05,10,7:25,1,0,0,Carolina Wren,1,UNK,7,3,
+3/25/2023,ZL,30.21315,93.22214,5,5,5,8,482.8,Urban Forest ,21.67,8.05,10,7:25,1,0,0,Blue Jay,1,UNK,7,4,
+3/25/2023,ZL,30.21315,93.22214,5,5,5,8,482.8,Urban Forest ,21.67,8.05,10,7:25,1,0,0,Red-winged Blackbird,3,UNK,7,7,
+3/25/2023,ZL,30.18759,93.24721,5,5,35,40,1126.5,Open,21.67,9.66,10,7:45,0,0,1,Northern Mockingbird,2,UNK,5,0,
+3/25/2023,ZL,30.18759,93.24721,5,5,35,40,1126.5,Open,21.67,9.66,10,7:45,0,0,1,House Finch,1,UNK,15,1,
+3/25/2023,ZL,30.18759,93.24721,5,5,35,40,1126.5,Open,21.67,9.66,10,7:45,0,0,1,Fish Crow,1,UNK,Flyover,3,
+3/25/2023,ZL,30.18759,93.24721,5,5,35,40,1126.5,Open,21.67,9.66,10,7:45,0,0,1,Blue Jay,1,UNK,7,3,
+3/25/2023,ZL,30.18759,93.24721,5,5,35,40,1126.5,Open,21.67,9.66,10,7:45,0,0,1,Red-headed Woodpecker,1,UNK,7,5,
+3/25/2023,ZL,30.18759,93.24721,5,5,35,40,1126.5,Open,21.67,9.66,10,7:45,0,0,1,Great-tailed Grackle,1,UNK,3,7,
+3/26/2023,ZL,30.18876,93.27035,2,18,91.4,1,304.8,Shoreline,21.1,4.83,100,6:59,0,4,0,Northern Mockingbird,1,UNK,25,1,
+3/26/2023,ZL,30.18876,93.27035,2,18,91.4,1,304.8,Shoreline,21.1,4.83,100,6:59,0,4,0,Purple Martin,1,UNK,25,4,
+3/26/2023,ZL,30.18876,93.27035,2,18,91.4,1,304.8,Shoreline,21.1,4.83,100,6:59,0,4,0,Northern Cardinal ,1,UNK,15,6,
+3/26/2023,ZL,30.18876,93.27035,2,18,91.4,1,304.8,Shoreline,21.1,4.83,100,6:59,0,4,0,White-winged Dove,2,UNK,12,9,
+3/26/2023,ZL,30.20507,93.26484,0.5,0.5,200,3,106.7,Shoreline,21.1,8.05,90,6:39,2,3,2,Northern Cardinal ,1,UNK,15,0,
+3/26/2023,ZL,30.20507,93.26484,0.5,0.5,200,3,106.7,Shoreline,21.1,8.05,90,6:39,2,3,2,Killdeer,1,UNK,30,1,
+3/26/2023,ZL,30.20507,93.26484,0.5,0.5,200,3,106.7,Shoreline,21.1,8.05,90,6:39,2,3,2,Northern Mockingbird,1,UNK,33,1,
+3/26/2023,ZL,30.20507,93.26484,0.5,0.5,200,3,106.7,Shoreline,21.1,8.05,90,6:39,2,3,2,American Robin,1,UNK,15,2,
+3/26/2023,ZL,30.20507,93.26484,0.5,0.5,200,3,106.7,Shoreline,21.1,8.05,90,6:39,2,3,2,House Finch,1,UNK,8,4,
+3/26/2023,ZL,30.20507,93.26484,0.5,0.5,200,3,106.7,Shoreline,21.1,8.05,90,6:39,2,3,2,Purple Martin,1,UNK,32,5,
+3/26/2023,ZL,30.17367,93.2538,3,13,10,5,643.7,Urban Forest ,21.1,4.83,90,7:17,0,0,0,White-winged Dove,1,UNK,50,0,
+3/26/2023,ZL,30.17367,93.2538,3,13,10,5,643.7,Urban Forest ,21.1,4.83,90,7:17,0,0,0,Northern Cardinal,1,UNK,32,1,
+3/26/2023,ZL,30.17367,93.2538,3,13,10,5,643.7,Urban Forest ,21.1,4.83,90,7:17,0,0,0,Cedar Waxwing,1,UNK,18,3,
+3/26/2023,ZL,30.17367,93.2538,3,13,10,5,643.7,Urban Forest ,21.1,4.83,90,7:17,0,0,0,Mourning Dove,1,UNK,50,4,
+3/26/2023,ZL,30.17367,93.2538,3,13,10,5,643.7,Urban Forest ,21.1,4.83,90,7:17,0,0,0,House Sparrow,2,"M,F",30,6,
+3/26/2023,ZL,30.13737,93.29941,4,4,25,2,45.7,Urban Forest ,21.1,4.83,100,7:37,0,0,0,Purple Martin,1,UNK,6,0,
+3/26/2023,ZL,30.13737,93.29941,4,4,25,2,45.7,Urban Forest ,21.1,4.83,100,7:37,0,0,0,Blue Jay,1,UNK,27,0,
+3/26/2023,ZL,30.13737,93.29941,4,4,25,2,45.7,Urban Forest ,21.1,4.83,100,7:37,0,0,0,Laughing Gull,15,UNK,Flyover,1,
+3/26/2023,ZL,30.13737,93.29941,4,4,25,2,45.7,Urban Forest ,21.1,4.83,100,7:37,0,0,0,Great-tailed Grackle,1,UNK,8,2,
+3/26/2023,ZL,30.13737,93.29941,4,4,25,2,45.7,Urban Forest ,21.1,4.83,100,7:37,0,0,0,Mourning Dove,1,UNK,30,2,
+3/26/2023,ZL,30.13737,93.29941,4,4,25,2,45.7,Urban Forest ,21.1,4.83,100,7:37,0,0,0,Eurasian Collared-Dove,1,UNK,15,5,
+3/26/2023,ZL,30.13737,93.29941,4,4,25,2,45.7,Urban Forest ,21.1,4.83,100,7:37,0,0,0,Cedar Waxwing,1,UNK,25,7,
+3/26/2023,ZL,30.14849,93.29554,4,16,60,21,213.4,Residential,21.1,4.83,100,7:53,0,5,3,Great-tailed Grackle,6,UNK,15,0,
+3/26/2023,ZL,30.14849,93.29554,4,16,60,21,213.4,Residential,21.1,4.83,100,7:53,0,5,3,Northern Mockingbird,1,UNK,10,1,
+3/26/2023,ZL,30.14849,93.29554,4,16,60,21,213.4,Residential,21.1,4.83,100,7:53,0,5,3,Red-winged Blackbird,1,UNK,28,2,
+3/26/2023,ZL,30.14849,93.29554,4,16,60,21,213.4,Residential,21.1,4.83,100,7:53,0,5,3,Northern Cardinal ,1,UNK,20,3,
+3/26/2023,ZL,30.14849,93.29554,4,16,60,21,213.4,Residential,21.1,4.83,100,7:53,0,5,3,White-winged Dove,1,UNK,32,3,
+3/26/2023,ZL,30.14849,93.29554,4,16,60,21,213.4,Residential,21.1,4.83,100,7:53,0,5,3,Common Grackle,5,UNK,22,6,
+3/29/2023,AA ,30.25745,91.98795,1,1,500,152,152,Forest,19,22.3,40,8:56,0,1,0,Tufted Titmouse ,3,UNK,15,0,
+3/29/2023,AA ,30.25745,91.98795,1,1,500,152,152,Forest,19,22.3,40,8:56,0,1,0,Yellow-rumped Warbler,5,UNK,5,6,
+3/29/2023,AA ,30.25745,91.98795,1,1,500,152,152,Forest,19,22.3,40,8:56,0,1,0,Hairy Woodpecker,1,UNK,50,7,
+3/29/2023,AA ,30.25745,91.98795,1,1,500,152,152,Forest,19,22.3,40,8:56,0,1,0,Blue Jay,2,male,28,8,
+3/29/2023,AA ,30.25745,91.98795,1,1,500,152,152,Forest,19,22.3,40,8:56,0,1,0,Carolina Chickadee,1,UNK,50,9,
+4/12/2023,AA ,30.209898,92.05247,4,500,17,0,157.8,Residential,16.6,8,0,8:53,1,2,2,Mourning Dove,3,UNK,Flyover,1,
+4/12/2023,AA ,30.209898,92.05247,4,500,17,0,157.8,Residential,16.6,8,0,8:53,1,2,2,Northern Cardinal ,2,"Male, Female",20,8,
+4/12/2023,AA ,30.20831,92.05125,4,500,8,0,38.7,Residential,16.6,8,0,9:10,1,2,0,Mourning Dove,1,UNK,15,0,
+4/12/2023,AA ,30.20831,92.05125,4,500,8,0,38.7,Residential,16.6,8,0,9:10,1,2,0,Blue Jay,2,Male,Flyover,6,
+4/12/2023,AA ,30.20831,92.05125,4,500,8,0,38.7,Residential,16.6,8,0,9:10,1,2,0,Northern Mockingbird,1,UNK,5,9,
+4/12/2023,AA ,30.20904,92.05169,8,3,10,0,42.1,Residential,16.6,8,0,9:27,0,2,2,Carolina Wren,1,UNK,UNK,0,
+4/12/2023,AA ,30.20904,92.05169,8,3,10,0,42.1,Residential,16.6,8,0,9:27,0,2,2,Downy Woodpecker,1,UNK,25,7,
+4/12/2023,AA ,30.20965,92.05107,1,2,35,15,0,Residential,16.6,8,0,9:48,0,2,0,American Crow,1,UNK,Flyover,0,
+4/12/2023,AA ,30.20965,92.05107,1,2,35,15,0,Residential,16.6,8,0,9:48,0,2,0,Blue Jay,1,Male,Flyover,4,
+4/12/2023,AA ,30.20965,92.05107,1,2,35,15,0,Residential,16.6,8,0,9:48,0,2,0,Mourning Dove,2,UNK,25,9,
+4/2/2023,AA ,30.20871,92.05391,2,10,2,5,500,Residential,24,17.7,20,11:00,0,1,5,Blue Jay,3,Male,flyover,1,
+4/2/2023,AA,30.21,92.05553,2,10,2,0,500,Residential,24,17.7,20,11:25,0,1,5,Mourning Dove,3,UNK,flyover,0,
+4/2/2023,AA,30.21133,92.05672,5,10,10,0,500,Residential,24,17.7,20,11:47,0,1,0,Northern Cardinal ,1,Male,15,1,
+4/2/2023,AA,30.21187,92.05672,5,5,17,0,500,Residential,24,17.7,20,12:09,0,1,2,American Crow,3,UNK,Flyover,0,
+4/2/2023,AA ,30.20907,92.05692,10,20,7,0,500,Residential,24,17.7,20,12:30,0,0,1,Blue Jay,1,Male,UNK,8,
+4/17/2023,AA ,30.25739,91.98961,6,1,500,0,152.2,Forest,25,20.9,10,13:00,0,17,4,Common Grackle,1,male,Flyover,1,
+4/17/2023,AA ,30.25739,91.98961,6,1,500,0,152.2,Forest,25,20.9,10,13:00,0,17,4,Red-winged Blackbird,2,male,Flyover,7,
+4/17/2023,AA ,30.25786,91.99036,2,1,500,0,152.2,Forest,25,20.9,10,13:17,0,17,4,Red-winged Blackbird,1,Male ,Flyover,1,
+4/17/2023,AA ,30.25912,91.99093,3,3,500,0,5,Forest,25,20.9,10,13:31,0,2,0,White-eyed Vireo,1,UNK,UNK,0,
+4/17/2023,AA ,30.25912,91.99093,3,3,500,0,5,Forest,25,20.9,10,13:31,0,2,0,Blue Jay,2,Male,10,5,
+4/17/2023,AA ,30.25912,91.99093,3,3,500,0,5,Forest,25,20.9,10,13:31,0,2,0,Tufted Titmouse ,2,UNK,UNK,8,
+4/17/2023,AA ,30.25917,91.9927,3,3,500,0,5,Forest,25,20.9,10,13:45,0,2,0,Hairy Woodpecker,1,MAle,50,1,
+4/17/2023,AA ,30.25917,91.9927,3,3,500,0,5,Forest,25,20.9,10,13:45,0,2,0,Carolina Wren,2,UNK,UNK,1,
+4/17/2023,AA ,30.25917,91.9927,3,3,500,0,5,Forest,25,20.9,10,13:45,0,2,0,Blue-gray Gnatcatcher,1,UNK,UNK,6,
+4/17/2023,AA ,30.25936,91.98687,3,3,500,0,5,Forest,25,20.9,10,14:00,0,2,1,Northern Cardinal ,2,male/female,25,0,
+4/17/2023,AA ,30.25936,91.98687,3,3,500,0,5,Forest,25,20.9,10,14:00,0,2,1,Mourning Dove,2,UNK,15,2,
+4/17/2023,AA ,30.25936,91.98687,3,3,500,0,5,Forest,25,20.9,10,14:00,0,2,1,Tufted Titmouse ,1,UNK,30,2,
+4/17/2023,AA ,30.25936,91.98687,3,3,500,0,5,Forest,25,20.9,10,14:00,0,2,1,American Crow,2,UNk,Flyover,5,
+4/17/2023,AA ,30.25936,91.98687,3,3,500,0,5,Forest,25,20.9,10,14:00,0,2,1,Turkey Vulture,4,UNK,Flyover,8,
+4/17/2023,AA ,30.25936,91.98687,3,3,500,0,5,Forest,25,20.9,10,14:00,0,2,1,Carolina Wren,1,UNK,4,9,
+4/18/2023,AA ,30.22735,91.91026,2,2,500,0,5,Forest,26.6,19,0,13:34,0,4,0,Common Grackle,1,UNK,Flyover,0,
+4/18/2023,AA ,30.22735,91.91026,2,2,500,0,5,Forest,26.6,19,0,13:34,0,4,0,Red-shouldered Hawk,2,UNK,3,2,sitting on the side of the walkway
+4/18/2023,AA ,30.22852,91.91149,2,2,500,0,5,Forest,26.6,19,0,13:56,0,4,0,Fish Crow,1,UNK,Flyover,1,
+4/18/2023,AA ,30.22884,91.91217,2,2,500,0,5,Forest,26.6,19,0,13:56,0,4,0,Chipping Sparrow,3,UNK,5,7,
+4/18/2023,AA ,30.22912,91.91416,2,2,500,0,5,Forest,26.6,19,0,14:14,0,4,0,Common Grackle,3,UNK,Flyover,0,
+4/18/2023,AA ,30.22912,91.91416,2,2,500,0,5,Forest,26.6,19,0,14:14,0,4,0,Anhinga,1,Male,50,0,
+4/18/2023,AA ,30.22903,91.91468,2,2,500,0,5,Forest,26.6,19,0,14:14,0,4,0,Anhinga,1,Female,75,4,
+4/18/2023,AA ,30.22901,91.91514,2,2,500,0,5,Forest,26.6,19,0,14:31,0,4,0,Yellow-rumped Warbler,5,UNK,25,1,
+4/18/2023,AA ,30.22901,91.91514,2,2,500,0,5,Forest,26.6,19,0,14:31,0,4,0,Pileated Woodpecker,1,UNK,40,5,
+4/18/2023,AA ,30.22901,91.91514,2,2,500,0,5,Forest,26.6,19,0,14:31,0,4,0,White Ibis,2,UNK,35,9,
+4/18/2023,AA ,30.229,91.91529,2,2,500,0,5,Forest,26.6,19,0,14:49,0,4,0,Anhinga,1,female,15,0,
+4/18/2023,AA ,30.229,91.91529,2,2,500,0,5,Forest,26.6,19,0,14:49,0,4,0,Red-winged Blackbird,2,Male,Flyover,6,
+4/18/2023,AA ,30.22893,91.91562,2,2,500,0,5,Forest,26.6,19,0,14:49,0,4,0,American Crow,2,UNK,Flyover,0,
+4/18/2023,AA ,30.22892,91.91588,2,2,500,0,5,Forest,26.6,19,0,15:04,0,4,0,Blue Jay,1,Male,Flyover,0,
+4/18/2023,AA ,30.22892,91.91588,2,2,500,0,5,Forest,26.6,19,0,15:04,0,4,0,Carolina Wren,2,UNK,50,4,
+4/18/2023,AA ,30.22892,91.91588,2,2,500,0,5,Forest,26.6,19,0,15:04,0,4,0,Red-winged Blackbird,4,Male,Flyover,6,
+4/18/2023,AA ,30.22892,91.91588,2,2,500,0,5,Forest,26.6,19,0,15:04,0,4,0,Great Egret,2,UNK,Flyover,9,
+4/18/2023,AA ,30.22884,91.91662,2,2,500,0,5,Forest,26.6,19,0,15:21,0,4,0,Cattle Egret,2,UNK,3,0,
+4/18/2023,AA ,30.22875,91.91765,2,2,500,0,5,Forest,26.6,19,0,15:41,0,4,0,Yellow-crowned Night-heron,1,UNK,35,4,
+4/18/2023,AA ,30.22875,91.91765,2,2,500,0,5,Forest,26.6,19,0,15:41,0,4,0,Blue Jay,2,Male,20,7,
+4/18/2023,AA ,30.22875,91.91765,2,2,500,0,5,Forest,26.6,19,0,15:41,0,4,0,Red-winged Blackbird,5,Male,Flyover,9,
+4/18/2023,AA ,30.22869,91.9182,2,2,500,0,5,Forest,26.6,19,0,16:03,0,4,0,Red-winged Blackbird,2,"M,F",Flyover,0,
+4/18/2023,AA ,30.22869,91.9182,2,2,500,0,5,Forest,26.6,19,0,16:03,0,4,0,Carolina Wren,1,UNK,40,7,
+4/18/2023,AA ,30.22869,91.9182,2,2,500,0,5,Forest,26.6,19,0,16:03,0,4,0,Great Blue Heron,1,UNK,Flyover,9,
+4/1/2023,CC,30.97822,-91.5528,3m,2m,500,0,0,forest ,17,3,15,6:39,0,0,0,Carolina Wren,7,UNK,6,1,
+4/1/2023,CC,30.97822,-91.5528,3m,2m,500,0,0,forest ,17,3,15,7:39,0,0,0,Northern Cardinal ,2,"M,F",3,1,
+4/1/2023,CC,30.97822,-91.5528,3m,2m,500,0,0,forest ,17,3,15,8:39,0,0,0,Eastern Towhee,1,UNK,HEARD ,3,
+4/1/2023,CC,30.97822,-91.5528,3m,2m,500,0,0,forest ,17,3,15,9:39,0,0,0,White-eyed vireo ,1,UNK,10,4,
+4/1/2023,CC,30.97822,-91.5528,3m,2m,500,0,0,forest ,17,3,15,10:39,0,0,0,Tufted Titmouse,2,UNK,HEARD,8,
+4/1/2023,CC,30.97822,-91.5528,3m,2m,500,0,0,forest ,17,3,15,11:39,0,0,0,Barred Owl ,3,UNK,20,2,
+4/1/2023,CC,30.97822,-91.5528,3m,2m,500,0,0,forest ,17,3,15,12:39,0,0,0,Red-eyed Vireo ,1,UNK,7,9,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,Carolina Wren,2,UNK,8,1,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,Northern Cardinal ,1,M,10,1,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,White-eyed vireo ,2,UNK,HEARD,3,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,Red-eyed Vireo ,2,UNK,HEARD,3,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,Wild Turkey,1,F,25,9,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,Mourning Dove,3,UNK,15,7,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,Red-bellied Woodpecker,1,M,FLYOVER,7,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,Eastern Towhee,1,UNK,HEARD,4,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,Great-crested Flycatcher,2,UNK,HEARD,4,
+4/1/2023,CC,30.97078,-91.55216,3m,1m,500,0,0,forest ,19,10,15,7:20,0,0,0,Blue Jay ,3,M,6,1,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,Laughing Gull,3,UNK,Flyover,2,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,Northern Cardinal ,1,m,5,2,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,Unknown,1,UNK,10,4,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,Brown-crested Flycatcher,1,UNK,4,4,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,Golden-fronted Woodpecker,1,UNK,Heard,3,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,House Sparrow,4,UNK,12,6,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,Solitary Sandpiper,1,UNK,heard,9,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,Couch's Kingbird,1,UNK,heard,8,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,Ladder-backed Woodpecker,2,UNK,20,7,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,Barn Swallow,8,UNK,flyover ,8,
+4/11/2023,CC,27.30918,-97.66964,5m,8m,2m,8m,40m,Coastal,20,30,5,7:19,0,1,0,White-winged Dove,2,"m,f ",flyover ,8,
+4/12/2023,CC,27.29999,-97.65856,50m,100m,200m,500,1m,Coastal Shoreline,21,20,0,8:03,0,3,0,Great-tailed Grackle,10,UNK,15,1,
+4/12/2023,CC,27.29999,-97.65856,50m,100m,200m,500,1m,Coastal Shoreline,21,20,0,9:03,0,3,0,Eurasian Collared-Dove,2,"m, f ",30,3,
+4/12/2023,CC,27.29999,-97.65856,50m,100m,200m,500,1m,Coastal Shoreline,21,20,0,10:03,0,3,0,Great Kiskadee,1,UNK,flyover,3,
+4/12/2023,CC,27.29999,-97.65856,50m,100m,200m,500,1m,Coastal Shoreline,21,20,0,11:03,0,3,0,Least Tern,3,UNK,flyover,4,
+4/12/2023,CC,27.29999,-97.65856,50m,100m,200m,500,1m,Coastal Shoreline,21,20,0,12:03,0,3,0,American Goldfinch,1,UNK,heard,6,
+4/12/2023,CC,27.29999,-97.65856,50m,100m,200m,500,1m,Coastal Shoreline,21,20,0,13:03,0,3,0,Great Blue Heron,1,UNK,20,7,
+4/12/2023,CC,27.29999,-97.65856,50m,100m,200m,500,1m,Coastal Shoreline,21,20,0,14:03,0,3,0,Black-bellied Whistling-Duck ,4,"M, F ",flyover,7,
+4/12/2023,CC,27.29999,-97.65856,50m,100m,200m,500,1m,Coastal Shoreline,21,20,0,15:03,0,3,0,Long-billed Curlew ,1,UNK,heard,9,
+4/12/2023,CC,27.29999,-97.65856,50m,100m,200m,500,1m,Coastal Shoreline,21,20,0,16:03,0,3,0,Laughing Gull,2,UNK,flyover,10,

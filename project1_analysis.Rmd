@@ -1,0 +1,84 @@
+---
+title: "project 1 analysis"
+author: "Sarah Bolinger"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+----------------------------------------------------------------
+
+## Intro
+
+Why are we using R?
+
+  - Useful to be familiar with R
+  - Can use in the cloud
+  - Limitations of Excel for analysis
+  
+## Instructions
+
+You can run the code in individual chunks in an RMarkdown document (instead of all at once) by hitting the 'play' button on a chunk. I would recommend doing it this way so you can walk through step-by-step.
+  
+First: open the csv on the OneDrive and enter your trend values. Upload it to RStudio Cloud. Then run the following:
+
+```{r}
+trend_data <- read.csv("trend_data.csv")
+
+```
+
+Now you can examine your data and make sure it loaded correctly.
+
+## T Test
+
+If you are doing a comparison of two groups (two species, two regions, etc), use this code
+
+### First, visualize your data:
+
+```{r}
+trend_data |> ggplot(aes(x="group1", y="group2")) +
+  geom_boxplot()
+```
+
+### Next, check the t-test assumptions:
+
+Normality
+
+```{r}
+trend_data |> select(group1) |> shapiro.test()
+trend_data |> select(group2) |> shapiro.test()
+```
+
+Equal variance
+
+```{r}
+
+var.test(trend_data$group1, trend_data$group2)
+```
+
+### Run the t-test & print the results
+
+If variance is NOT equal, set var.equal to FALSE
+If doing a 1-tailed test, add alternative="greater" or alternative="less"
+
+```{r}
+out <- t.test(trend_data$group1, trend_data$group2, var.equal=TRUE)
+
+out
+```
+
+
+```{r}
+
+```
+
+

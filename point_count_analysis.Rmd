@@ -1,0 +1,421 @@
+---
+title: "Point Count Analysis"
+author: "Sarah Bolinger"
+date: "`r Sys.Date()`"
+output: html_document
+
+---
+
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+The document has text, like this, interspersed with code "chunks", which start and end with ``` and should have a different background color.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can turn individual chunks on and off in the settings.
+
+You can also run one chunk at a time by hitting the play button on a chunk. The output from that chunk will be visible below it.
+
+If you've never used R before, don't worry! This is (in my opinion) an easier way to use R. All you need to do is read through the text. Look for the word **Edit** - This will be where you need to edit a code chunk before running it. You can choose whether to run the code one chunk at a time, or do the edits and click **Knit** in order to run it all at once and output to a separate document. You can open that document in a separate window to make it easier to read.
+
+### *NOTE* The output from Knit will NOT be what you turn in to me. You should write a paper just like last time.
+
+
+
+### 1. Setup
+
+This chunk loads the packages needed to run the script, and sets options for the entire document. 
+
+*NOTE* INSTALLING PACKAGES:
+
+All the packages need to be installed, by going to Tools --> Install packages (or using the install.packages command in the Console). In RStudio Cloud, you should get a message prompting you to install the necessary packages. If you click install in that message, it will do everything else for you.
+
+```{r setup, include=FALSE}
+# for more on settings, see <https://yihui.org/knitr/options/#chunk-options>
+knitr::opts_chunk$set(echo = FALSE)
+library(AICcmodavg)
+library(gt)
+library(lubridate)
+library(tidyverse)
+library(stats)
+library(suncalc)
+```
+
+### 2. Read in the data and examine for inconsistencies:
+
+The data becomes a dataframe called counts1. You can use the table() function to look at any variable/column.
+
+If you click the play button, you can see from the output that not all the columns with numbers have been read as numeric. This could be for a number of reasons. For treeDist, it's because the letter "m" is mixed in with the data. numCars is not numeric because of text in the column. We'll fix the numeric columns in the next step.
+
+You should also make sure there's only one name for each species. For example, "Northern cardinal", "Nothern Cardinal", and "northern cardinal" are all different when R reads them, because of the capitalization. Spelling has the same effect. You can fix the species names in the csv file and then run this whole chunk again to see the new names.
+
+I fixed the longitudes that were not negative (the points were in Tibet!), but there are other issues. Some of them, like the species names, might be easiest to fix in Excel. BUT make sure the data file is saved as a csv file, or it won't be imported. 
+
+```{r echo=FALSE}
+
+## THIS IS A CODE CHUNK
+## THIS IS A CODE CHUNK
+
+## column names:
+nm <- c("date", "init", "lat", "lon", "treeDist", "shrubDist", "buildDist", "roadDist", 
+        "waterDist", "habitat", "temp", "wind", "cloud", "start", "numCats", "numPpl", 
+        "numCars", "species", "count", "sex", "birdDist", "minute", "notes")
+
+files <- list.files(pattern="\\.csv$") # list of all csv files in directory
+countsDat <- read_csv(files, skip=1,col_names=nm) # read the csv files into a dataframe
+
+cat("\n\n>>> Variable (column) names:\n")
+names(countsDat)
+
+
+cat("\n>>> Species names as entered in spreadsheet & frequency:")
+table(countsDat$species)
+
+cat("\n>>> Values entered for distance from trees; number of cars; cloud cover:\n\n")
+cat(unique(countsDat$treeDist), "\n\n", unique(countsDat$numCars), "\n\n", unique(countsDat$cloud))
+
+```
+
+### 3. Fix the numeric data and add new columns
+
+I removed the characters from the number columns so I could change the type to numeric. I also changed the type of the categorical variables (like year, sex, etc) to factor.
+
+I added columns for some potential predictor variables: year, month, and minutes past sunrise.
+
+The others were used to help with calculations.
+
+
+```{r echo=FALSE}
+## add column for time bird was seen:
+counts <- countsDat %>% 
+  mutate(time = as.POSIXct(
+    strptime(paste(date,start,sep=" "), 
+             format="%m/%d/%Y %H:%M", 
+             tz="America/Chicago") 
+    + minutes(as.integer(minute))) ) %>%
+  mutate(date=mdy(date), 
+         flyover=birdDist %in% c("Flyover", "flyover"))
+
+cat("number of rows with missing time data:", length(which(is.na(counts$time))), "\n\n")
+counts <- counts[which(!is.na(counts$time)),] # remove rows with NA for time
+
+counts <- counts %>%
+  mutate(across(ends_with("Dist"), ~ str_remove_all(.,"[^0-9.-]"))) %>% # remove all non-numeric characters
+  mutate(across(ends_with("Dist"), as.numeric) ) %>%
+    mutate(across(c(numCars,cloud,wind), ~ str_remove_all(.,"[^0-9.-]"))) %>% # remove all non-numeric characters
+    mutate(numCars = ifelse(numCars=="", 200, numCars))  %>% 
+    mutate(across(c(numCars,cloud,wind, count), as.numeric))
+
+## add more columns:
+# breeding <- ("Northern Cardinal", "Carolina Wren", "Northern Mockingbird", "")
+counts <- counts %>%
+  mutate(lon            = ifelse(lon>0, lon*-1, lon),
+         year           = format(time, "%Y"),
+         month          = format(time, "%b")
+  )
+
+counts <- counts %>%
+  mutate(
+    sunr           = getSunlightTimes(  data=counts, tz="America/Chicago" )$sunrise,
+    minPastSunrise = as.numeric(round(difftime(time, sunr, units="mins")))
+  ) 
+
+counts <- counts %>%
+  mutate(across(c(sex, flyover, year, month, habitat), as.factor))
+
+cat("\n\ncategories for habitat (duplicate names need to be edited if you want to use as predictor):\n\n")
+levels(counts$habitat)
+
+```
+
+### 4. Examine the data again
+
+Make sure the new column values make sense, and check for lingering inconsistencies.
+
+You can change the variable name (after the $) in table() to look at the distribution of a particular variable. Just make sure the spelling/capitalization matches exactly. 
+
+Many of these lines are "commented out" (they have a # in front of them). This means they won't run when you run the chunk. The easiest way to "uncomment" them is to put your cursor on that line and go to Code --> Comment/Uncomment Lines or use the keyboard shortcut Ctrl+Shift+C.
+
+```{r echo=FALSE}
+# table(counts$minPastSunrise)
+# table(counts$time)
+# table(counts$species[counts$year=="2025"])
+# table(counts1$lon)
+# table(counts$species)
+
+cat("\n>>> Values for distance from trees after editing:\n")
+unique(counts$treeDist)
+
+cat("\n>>> Missing values (NA) in each column:\n\n")
+colSums(is.na(counts)) # how many NAs in each column?
+# counts$minute[which(is.na(counts$time))] # for which values of minute does time == NA?
+# which(is.na(counts$time)) # what are the indices where time == NA?
+```
+
+
+### 5. Filter the data: **Edit** your filter choices.
+
+You can choose to focus on counts within a specific range of longitude/latitude, or within a certain amount of time from sunrise. 
+
+This is also where you should enter the species or group you want to focus on. If an individual species has fewer than 20 points, consider using a larger taxonomic group (like a genus or family) or an ecological guild (foraging guild, etc.). You will type in the names of the species in the group in between the parentheses, with quotations around each species name. Again, the name must be spelled exactly how it was input into R.
+
+*By default, the code will filter to points within Louisiana, and to species within Icteridae.* 
+
+The other filter options are *commented out* (they have a "#" in front of them). You can "uncomment" them to get them to work. Simply put your cursor anywhere in that line and go to Code --> Comment/Uncomment Lines (keyboard shortcut is ctrl+Shift+c)
+
+The variables that are uncommented in the first section should match the variables that are uncommented in the second section. 
+
+You can replace the max and min latitude and longitude if you want points from a larger area. To get coordinates for a certain area, try bboxfinder.com
+
+
+```{r echo=TRUE}
+
+################# 1. INPUT VALUES HERE: ##########################################
+
+# spSelect <- "Carolina Wren"
+spGroup <- c("Common Grackle", "Eastern Meadowlark", "Red-winged Blackbird") # list names here
+# lonRange <- c(-92.03, -92.01) # campus only
+# latRange <- c(30.2, 30.22) # campus only
+lonRange <- c(-94, -89.5) # Louisiana
+latRange <- c(29, 33.5) # Louisiana
+
+###############################################################################
+
+
+################## 2. FILTERS YOU WANT TO USE: #####################
+
+countsSubset <- counts %>%
+  filter(
+    # birdDist != "flyover",      # exclude flyovers
+    # minPastSunrise < 300,        # exclude counts > 5 hrs after sunrise
+    between(lon, lonRange[1], lonRange[2]),
+    between(lat, latRange[1], latRange[2]),
+    species %in% spGroup,
+    # species == spSelect
+  )
+
+###############################################################################
+
+
+
+```
+
+### 6. List all variables
+
+These are the names you will use when typing your model formulas.
+
+```{r}
+names(counts)
+```
+### 7. **Edit** the code - subset the data to include only your chosen variables. 
+
+Look at your hypotheses and the variables needed to model each of them. Fill in the variables below between the parentheses, and the code will do the rest. You can leave unused predictors as they are and they'll be removed.
+
+After subsetting, we check to make sure there are no missing values, and that we have enough observations left to do the analysis. 
+
+If one of your variables is limiting the number of observations available, you may go back and change your hypotheses (before fitting the models!) and run this code chunk again with the new variables.
+
+```{r}
+
+response <- "count"
+predictor1 <- "waterDist"
+predictor2 <- "buildDist"
+predictor3 <- ""
+predictor4 <- ""
+
+vars <- c(response, predictor1, predictor2, predictor3, predictor4)
+vars <- vars[vars!=""]
+
+countsSubset <- countsSubset %>%
+  select(all_of(vars))
+
+cat("\n>>> check your selected columns for missing values:\n\n")
+colSums(is.na(countsSubset)) # how many NAs in each column?
+cat("\n>>> Number of observations without missing values:\n\n")
+length(complete.cases(countsSubset))
+
+```
+
+### 7b. Remove rows with missing values and plot the data
+
+To compare models using AIC, they need to be run using the same data, so we need to remove missing values (NA) BEFORE running the models and creating the AIC table. Also, you want to have a minimum of 15 observations (20 is better, and more than that is great!)
+
+*We will make three plots*
+
+First, plot the predictor variables against the response variable. The predictors are shown in different colors.
+
+Next, make a histogram plot of the response (count). In this plot, you can see that the data are not normally distributed. A better fit for count data is a Poisson distribution. This is why we will use a GLM with a log link function (instead of simple linear regression). If you look up the ggplot2 package (which is part of the tidyverse collection that we loaded), you will find many ways you can customize this plot (not necessary).
+
+This is further verified by the third plot, the quantile-quantile plot (qqplot) for the normal distribution. If the errors were normally distributed, they would fall more or less along the line. Even if you exclude outliers (which I wouldn't recommend), the points still follow a trend away from the line, indicating a non-normal distribution.
+
+```{r}
+
+countsSubset <- countsSubset[complete.cases(countsSubset),] # remove rows with missing values
+
+countsLong <- countsSubset %>%
+  pivot_longer(cols=vars[-1],
+               names_to="predictor",
+               values_to="value")
+
+pl <- ggplot(countsLong, aes(y=count, x=value, color=predictor)) +
+  geom_point() +
+  theme_classic()
+pl
+ggsave("predictor_var_plot.png")
+
+hist <- ggplot(countsSubset, aes(x=count)) +
+  geom_histogram() +
+  labs(title=paste("Histogram of Response Variable:",response), x="Value", y="Frequency") +
+  theme_classic()
+hist
+ggsave("response_histogram.png")
+
+# png("qqplot.png")
+qqnorm(countsSubset$count)
+qqline(countsSubset$count)
+# dev.off()
+
+```
+
+### 7c. Compute descriptive statistics
+
+You can use these to verify that the model we chose will fit the data.
+
+```{r}
+
+summary(countsSubset)
+
+lapply(countsSubset, function(x) rbind( mean = mean(x),
+                                        median = median(x),
+                                        variance = var(x),
+                                        standardDev = sd(x),
+                                        stErrorOfMean = sqrt(var(x))/length(x)
+                                        ))
+```
+
+
+### 8. Specify the models to be fitted: **Edit** the model formulas
+
+You will use AIC to compare 2-4 different models, plus a null model (response ~ 1). Decide on the models BEFORE you run them--don't just try every variable and choose the most significant ones (see slides for more info). Each model should represent a distinct ecological hypothesis.
+
+For example, my hypotheses (and the associated models) are:
+
+* Count of icterids (blackbirds) is negatively related to the distance from water.
+
+    + count ~ waterDist
+
+* Count of icterids (blackbirds) is negatively related to the distance from water and the distance from buildings.
+
+    + count ~ waterDist + buildDist
+
+So essentially, I have a simple model that looks at the effect of distance from water, and I am testing to see if adding distance from buildings to that model improves the fit. 
+
+Once you have decided on your hypotheses, specify your models below. To specify the model, edit the text in between the quotation marks. The first model (mods[[1]]) is the null model, which we will use to see if any of our models are actually a good fit. You can leave it as it is. 
+
+Write out 2-4 different models that match your hypotheses. They should have the following format, but replace with the actual variable names:
+
+"response ~ predictor"
+OR 
+"response ~ predictor1 + predictor2 (+ ...)"
+
+You can leave unused ones blank and they'll be removed later in the code.
+
+*NOTE: The spelling and capitalization of the variables MUST match what is shown in the list above.*
+
+```{r echo=TRUE}
+
+mods <- list()
+
+mods[[1]] <- "count ~ 1" # null model - leave as it is
+mods[[2]] <- "count ~ waterDist"
+mods[[3]] <- "count ~ waterDist + buildDist"
+mods[[4]] <- ""
+mods[[5]] <- ""
+
+```
+
+### 9. Run the models and create the AIC table
+
+Now we get R to fit the GLM function for each model we've specified, and store the results in a list. Then we create a table of AIC values for the models, after first specifying the names we want to see in the table. Then, we create a nicer-looking version of the table and write a function (save_tab) to save it as an image file. You can then use this in your report.
+
+See the PowerPoint slides for more info on ranking models with AIC. 
+
+So why do we include the null model? Our AIC comparisons are all relative to the other models in the set. Even if we have a set of terrible models, AIC will still tell us which is the "best" of that set. But at a minimum, we can tell if our best model is better than the null model (an intercept-only model, so a horizontal line). You could also include more measures of model if you are concerned that even your best model isn't a good fit, but we won't do that in this project.
+
+```{r}
+
+mods <- mods[mods!=""] # remove any empty model formulas
+mnames <- c("Null", unlist(mods[-1]))
+
+fit <- list()
+for(m in seq_along(mods)){
+  fit[[m]] <- glm(
+    as.formula(mods[[m]]), 
+    data=countsSubset, 
+    family=poisson(link="log"))
+}
+names(fit) <- mnames
+
+save_tab <- function(tab, dpi=(1800/6), suffix=""){
+
+  now = format(Sys.time(), "%m%d_%H%M%S") # seconds bc tables all generated in < 1 min
+  tabName <-  deparse(substitute(tab))
+  file_name1 <- paste0(tabName, now, suffix, ".png")
+  gt::gtsave(tab, file_name1)
+  return(file_name1)
+}
+
+
+
+AICtab <- aictab(cand.set=fit, modnames=mnames)
+AICtab
+
+AICtab <- AICtab %>%
+  as.data.frame() %>%
+  select("Modnames", "K", "Delta_AICc", "AICcWt") %>%
+  mutate(
+    across(
+      where(is.numeric), ~round(.x, digits=2))) %>%
+  gt(rownames_to_stub = TRUE) %>%
+  tab_header(title=paste("AIC model ranking")) %>%
+  tab_options( column_labels.font.weight = "bold" ) 
+
+AICtab
+
+save_tab(tab=AICtab)
+
+```
+
+### 10. Look at the summary of the best model(s)
+
+The function below identifies the best model or model set by one of three methods (type ?confset in the Console and hit Enter to read more). We will use method='raw'.
+
+Basically, the function goes through the models, starting with the best model and proceeding down the AIC ranking, and adds values until some threshold is met. For this method, it is looking for the models necessary to get the cumulative AIC weight > 0.95
+
+You may only need one model to meet the threshold, or you may have a set of models.
+
+We won't do model averaging for this paper, so just include whether or not you had a single best model or a set. You could mention in the discussion that model averaging could be done on the set.
+
+Because we aren't doing model averaging, the table that is generated is for best model only. In my example, it shows me that both of the coefficients in the best model are significant. This means both of my predictor variables have a significant effect on the response variable. It doesn't tell me anything about the fit of the model, or that this is the best possible model. It's still just the best model out of the set.
+
+```{r}
+c <- confset(cand.set=fit, modnames=mnames, method='raw')
+c
+
+modelFit <- summary.glm( fit[[ match( AICtab$`_data`$Modnames[1], 
+                       names(fit)
+                       ) ]] ) 
+
+fitTable <- coef(modelFit) %>% 
+  as.data.frame() %>% 
+  gt(rownames_to_stub = T) %>%
+  tab_header(title=paste("Effect of predictors on", response), 
+             subtitle=paste("model:",AICtab$`_data`$Modnames[1]) ) %>%
+  tab_options( column_labels.font.weight = "bold") 
+
+fitTable
+
+save_tab(fitTable)
+```
