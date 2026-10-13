@@ -12,7 +12,7 @@ params:
 library(auk)
 library(dplyr)
 library(gt)
-library(ggplot2)
+# library(ggplot2)
 library(lubridate)
 library(suncalc)
 library(lutz)
@@ -26,6 +26,16 @@ if (!exists("params")) {
     "prompt" = TRUE
   ) 
 }
+```
+
+## Enter file names for the observations and sampling data:
+
+```{r}
+samplFile <- "data/ebd_LA_2015-2025_all_spp_sampling.txt"
+obsFile <- "data/ebd_LA_2015-2025_all_spp.txt"
+# obsFile <- "data/ebd_LA_data.zip"
+# obsData <- read_ebd(unz(obsFile))
+
 ```
 
 ## Input your filter values. 
@@ -88,7 +98,46 @@ dateEnd   <- ""
 If the filter looks correct, type "Y" at the prompt to get R to apply it and then combine the two datasets (type ?semi_join in the console to see what it does) to get rid of any checklists that don't appear in both places. 
 
 ```{r}
-source("load_filter_ebird_data.R")
+```
+
+```{r}
+# source("load_filter_ebird_data.R")
+if (!nzchar(dateStart)) dateStart <- min(samplData$observation_date)
+if (!nzchar(dateEnd)) dateEnd <- max(samplData$observation_date)
+if (locType=="state"){
+  filt <- rlang::exprs(
+      state_code %in% stateCodes,
+      country_code %in% countrySelect,
+      between(observation_date, dateStart, dateEnd)
+    )
+} else if (locType=="lat.lon"){
+  filt <- rlang::exprs(
+      between(latitude, latRange[1], latRange[2]),
+      between(longitude, lonRange[1], lonRange[2]),
+      between(observation_date, dateStart, dateEnd)
+    )
+}
+invisible(lapply(filt, function(x) {
+           if (length(x)>3) {
+            cat("\n min",paste(x[[2]],eval(x[[3]]), sep=":"))
+            cat("\t max",paste(x[[2]],eval(x[[4]]), sep=":"))
+           } else {
+             cat("\n",paste(x[[2]], eval(x[[3]]), sep=":"))
+           }
+  }))
+
+if (params$prompt){
+  filterTrue <- readLine(prompt="Apply filter to data? (Type Y or N):")
+  filterTrue <- ifelse(filterTrue=="Y", TRUE, FALSE)
+} else {
+  filterTrue <- TRUE
+}
+
+if (filterTrue){
+  samplData <- samplData |> filter(all_species_reported) |> filter(!!!filt)
+  obsData <- obsData |> filter(all_species_reported) |> filter(!!!filt)
+  obsData <- semi_join(obsData, samplData, by="checklist_id")
+}
 ```
 
 ## Visualizations of entire dataset.
