@@ -20,7 +20,7 @@ You can also run one chunk at a time by hitting the play button on a chunk. The 
 
 If you've never used R before, don't worry! This is (in my opinion) an easier way to use R. All you need to do is read through the text. Look for the word **Edit** - This will be where you need to edit a code chunk before running it. You can choose whether to run the code one chunk at a time, or do the edits and click **Knit** in order to run it all at once and output to a separate document. You can open that document in a separate window to make it easier to read.
 
-### *NOTE* The output from Knit will NOT be what you turn in to me. You should write a paper just like last time.
+### *NOTE* The output from Knitting will NOT be what you turn in to me. You should write a paper just like last time.
 
 
 
@@ -36,11 +36,11 @@ All the packages need to be installed, by going to Tools --> Install packages (o
 # for more on settings, see <https://yihui.org/knitr/options/#chunk-options>
 knitr::opts_chunk$set(echo = FALSE)
 library(AICcmodavg)
+library(stats)
 library(gt)
 library(lubridate)
-library(tidyverse)
-library(stats)
 library(suncalc)
+library(tidyverse)
 ```
 
 ### 2. Read in the data and examine for inconsistencies:
@@ -160,6 +160,7 @@ colSums(is.na(counts)) # how many NAs in each column?
 You can choose to focus on counts within a specific range of longitude/latitude, or within a certain amount of time from sunrise. 
 
 This is also where you should enter the species or group you want to focus on. If an individual species has fewer than 20 points, consider using a larger taxonomic group (like a genus or family) or an ecological guild (foraging guild, etc.). You will type in the names of the species in the group in between the parentheses, with quotations around each species name. Again, the name must be spelled exactly how it was input into R.
+ *NOTE* Be sure to properly spell/capitalize the species name(s), especially the word after the hyphen in hyphenated names, which will be lowercase (e.g., in Red-winged Blackbird, note that "winged" is not capitalized).
 
 *By default, the code will filter to points within Louisiana, and to species within Icteridae.* 
 
