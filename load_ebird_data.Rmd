@@ -1,0 +1,325 @@
+---
+title: "eBird data analysis"
+author: "Sarah Bolinger"
+date: "`r Sys.Date()`"
+output: html_document
+params:
+  prompt: FALSE
+---
+
+
+```{r}
+library(auk)
+library(dplyr)
+library(gt)
+library(ggplot2)
+library(lubridate)
+library(suncalc)
+library(lutz)
+library(rnaturalearth)
+library(sf)
+library(gridExtra)
+library(readr)
+
+if (!exists("params")) {
+  params <- list(
+    "prompt" = TRUE
+  ) 
+}
+```
+
+## Input your filter values. 
+
+### Location
+
+Input the range of latitudes/longitudes, OR the state/country.
+
+```{r}
+lonRange <- c(-94, -89.5) # Louisiana
+latRange <- c(29, 33.5) # Louisiana
+
+## ---- OR -------------------------------------------------------------
+
+countrySelect <- c("US") ## country code
+countryFull <- c("United States of America")
+# countryFull <- c("United States of America", "Canada", "Mexico")
+stateSelect <- c("LA")   ## state code
+stateCodes <- sapply(stateSelect, function(x) paste(countrySelect, x, sep="-")) 
+
+```
+
+Then choose either "state" or "lat.lon" so R knows which values to filter by:
+
+```{r}
+locType <- "state" ## "state" or "lat.lon"
+# locType <- "lat.lon" ## "state" or "lat.lon"
+```
+### Species
+
+First, view all the species names:
+
+```{r}
+print(table(obsData$common_name))
+spGrpName <- "Icteridae"
+```
+
+If your species contains lots of subspecies, or if you want to use a taxonomic group besides species, check this out: https://ebird.github.io/ebird-best-practices/ebird.html#sec-ebird-import-rollup. Check with me if you're unsure.
+
+Then, type the names you want below, in quotes, separated by commas. For filtering the data later, enter the *scientific name*. You will need to look these up. It probably goes without saying that the spelling and capitalization matter!
+
+Here, I have the scientific names of Common Grackle, Eastern Meadowlark, and Red-winged Blackbird:
+
+```{r}
+sppSelect <- c("Quiscalus quiscula", "Sturnella magna", "Agelaius phoeniceus")
+
+```
+
+### Date
+
+Leave blank if not sorting by date.
+
+```{r}
+dateStart <- ""
+dateEnd   <- ""
+```
+
+## Filter both datasets.
+
+If the filter looks correct, type "Y" at the prompt to get R to apply it and then combine the two datasets (type ?semi_join in the console to see what it does) to get rid of any checklists that don't appear in both places. 
+
+```{r}
+source("load_filter_ebird_data.R")
+```
+
+## Visualizations of entire dataset.
+
+```{r}
+
+```
+
+# CREATE COUNT DATA
+
+## Filter by species
+
+Filter to our chosen species:
+
+```{r}
+counts <- obsData |> 
+  filter( scientific_name %in% sppSelect) 
+print(table(counts$scientific_name)) ## you can see it worked 
+```
+
+## Calculate other variables.
+
+To get the time since sunrise, we first get the timezone from the latitude and longitude, then calculate the sunrise time and how many minutes passed between sunrise and the start time (minPastSunrise). We also might want to use year or month as a separate variable.
+
+```{r}
+
+counts <- counts |> 
+  rowwise() |>
+  mutate(timeZone = tz_lookup_coords(lat=latitude, lon=longitude),
+         start = as.POSIXct(paste(observation_date,time_observations_started, sep=" "), tz=timeZone), 
+         end   = start + minutes(duration_minutes),
+         year  = format(start, "%Y"),
+         month = format(start, "%b"),
+         date  = format(start, "%d-%b"),
+         sunr  = getSunlightTimes(observation_date,latitude,longitude,tz=timeZone)$sunrise,
+         minPastSunrise = as.numeric(round(difftime(start, sunr, units="mins")))
+  ) 
+```
+
+
+## Calculate effort variables.
+
+These are from https://ebird.github.io/ebird-best-practices/ebird.html
+
+```{r}
+# function to convert time observation to hours since midnight
+time_to_decimal <- function(x) {
+  x <- hms(x, quiet = TRUE)
+  hour(x) + minute(x) / 60 + second(x) / 3600
+}
+
+det <- det |> 
+  mutate(
+    # convert count to integer and X to NA (ignore warning "NAs introduced by coercion")
+    observation_count = as.integer(observation_count),
+    # effort_distance_km to 0 for stationary counts
+    effort_distance_km = if_else(protocol_type == "Stationary", 
+                                 0, effort_distance_km),
+    # convert duration to hours
+    effort_hours = duration_minutes / 60,
+    # speed km/h
+    effort_speed_kmph = effort_distance_km / effort_hours,
+    # convert time to decimal hours since midnight
+    hours_of_day = time_to_decimal(time_observations_started),
+  ) 
+```
+
+You probably got an error that 'protocol_type' was not found! If you check the data under "Session", you can see what the variable name should be. Change it above to make the code work.
+
+## Filter effort to get better comparisons.
+
+The amount of effort (time and/or distance) is directly correlated with detectability (more info at the link above).
+
+*Question: why would we want to use observations where species detectability is similar? Think about what might happen if we didn't*
+
+So, to be sure we are comparing data with similar detection probability, we can filter by effort. These are the effort filter values recommended by eBird. 
+
+*Question: what does this filter do to our data? In other words, what values are we keeping?*
+
+```{r}
+det <- det |>
+    filter(protocol_name %in% c("Stationary", "Traveling"),
+         effort_hours <= 6,
+         effort_distance_km <= 10,
+         effort_speed_kmph <= 100,
+         number_observers <= 10)
+```
+
+## Visualize the filtered data.
+
+```{r}
+
+```
+
+# CREATE DETECTION DATA
+
+## Zero-filling
+
+To make these data into detection/non-detection data, we need to zero-fill them. Recall what zero-filling does from lecture. We end up with a column "species_observed", which has values of TRUE or FALSE.
+
+```{r}
+det <- auk_zerofill(obsData, samplData, collapse=TRUE)
+```
+
+## Filter by species
+
+```{r eval=FALSE include=FALSE}
+det <- det |> 
+  filter( scientific_name %in% sppSelect) 
+```
+
+## Calculate time variables.
+
+```{r}
+
+det <- det |> 
+  rowwise() |>
+  mutate(timeZone = tz_lookup_coords(lat=latitude, lon=longitude),
+         start = as.POSIXct(paste(observation_date,time_observations_started, sep=" "), tz=timeZone), 
+         end   = start + minutes(duration_minutes),
+         year  = format(start, "%Y"),
+         month = format(start, "%b"),
+         date  = format(start, "%d-%b"),
+         yearDay  = format(start, "%j"),
+         sunr  = getSunlightTimes(observation_date,latitude,longitude,tz=timeZone)$sunrise,
+         minPastSunrise = as.numeric(round(difftime(start, sunr, units="mins")))
+  ) 
+```
+
+## Calculate effort variables.
+
+```{r}
+# function to convert time observation to hours since midnight
+time_to_decimal <- function(x) {
+  x <- hms(x, quiet = TRUE)
+  hour(x) + minute(x) / 60 + second(x) / 3600
+}
+
+det <- det |> 
+  mutate(
+    # convert count to integer and X to NA (ignore warning "NAs introduced by coercion")
+    observation_count = as.integer(observation_count),
+    # effort_distance_km to 0 for stationary counts
+    effort_distance_km = if_else(protocol_type == "Stationary", 
+                                 0, effort_distance_km),
+    # convert duration to hours
+    effort_hours = duration_minutes / 60,
+    # speed km/h
+    effort_speed_kmph = effort_distance_km / effort_hours,
+    # convert time to decimal hours since midnight
+    hours_of_day = time_to_decimal(time_observations_started),
+  ) 
+```
+
+## Filter effort to get better comparisons.
+
+```{r}
+det <- det |>
+    filter(protocol_name %in% c("Stationary", "Traveling"),
+         effort_hours <= 6,
+         effort_distance_km <= 10,
+         effort_speed_kmph <= 100,
+         number_observers <= 10)
+det <- det |>
+  select(checklist_id, observer_id,
+         observation_count, species_observed, 
+         state_code, locality_id, latitude, longitude,
+         protocol_name, all_species_reported,
+         observation_date, year, yearDay,
+         hours_of_day, 
+         effort_hours, effort_distance_km, effort_speed_kmph,
+         number_observers)
+
+```
+
+**R NOTE** The 4 code blocks above are almost identical to the code we ran under "CREATE COUNT DATA". Instead of typing it twice, we COULD create function(s) to do the same tasks and only have to type the code once. Then we just have one line of code to call to function, rather than copying over all these lines and changing the names slightly.
+
+# MAP THE DETECTION DATA
+
+## Create map of the area you specified above (either latitude/longitude box, or state(s))
+
+Prepare the GIS data & the observations:
+
+```{r}
+landMap <- read_sf("data/gis-data.gpkg", "ne_land") |> 
+    st_geometry()
+stProvBound <-  read_sf("data/gis-data.gpkg", "ne_state_lines") |> 
+      st_geometry()
+ctryBound <- read_sf("data/gis-data.gpkg", "ne_country_lines") |> 
+      st_geometry()
+studyArea <- read_sf("data/gis-data.gpkg", "ne_states") |> 
+  # filter(state_code %in% stateCodes) |>
+  filter(state_code == "US-AL") |>
+      st_geometry()
+
+detections_sf <- det |>
+  st_as_sf(coords = c("longitude", "latitude"), crs = 4326) |> 
+  select(species_observed)
+```
+
+```{r}
+
+plTitle <- ""
+bbox <- st_bbox(studyArea)
+plot(st_geometry(detections_sf),
+     xlim=c(bbox[3], bbox[1]),
+     ylim=c(bbox[2], bbox[4]),
+     main=plTitle, col=NA, border=NA)
+
+plot(landMap, col = "#cfcfcf", border = "#888888", lwd = 0.5, add = TRUE)
+plot(studyArea, col = "#e6e6e6", border = NA, add = TRUE)
+plot(stProvBound, col = "#ffffff", lwd = 0.75, add = TRUE)
+plot(ctryBound, col = "#ffffff", lwd = 1.5, add = TRUE)
+yesColor <- "#4daf4a"
+noColor <- "#998585"
+plot(filter(detections_sf, !species_observed),
+     pch = 19, cex = 0.2, col = alpha(noColor, 0.35),
+     add = TRUE)
+# observed
+plot(filter(detections_sf, species_observed),
+     pch = 19, cex = 0.3, col = alpha(yesColor, 1),
+     add = TRUE)
+# legend
+legendTxt <- sprintf("Sighting of %s", spGrpName)
+legend("bottomright", bty = "n",
+       col = c(noColor, yesColor),
+       legend = c("eBird checklist", legendTxt),
+       pch = 19)
+box()
+```
+
+```{r}
+
+```
