@@ -31,8 +31,13 @@ if (!exists("params")) {
 ## Enter file names for the observations and sampling data:
 
 ```{r}
-samplFile <- "data/ebd_LA_2015-2025_all_spp_sampling.txt"
-obsFile <- "data/ebd_LA_2015-2025_all_spp.txt"
+samplFile <- "data/ebd_LA_data/ebd_LA_2015-2025_all_spp_sampling.txt"
+obsFile <- "data/ebd_LA_data/ebd_LA_2015-2025_all_spp.txt"
+
+
+## This is where the filtered data will be saved to:
+samplOut <- "data/ebd_LA_filtered.txt"
+obsOut <- "data/ebd_LA_filtered_sampling.txt"
 # obsFile <- "data/ebd_LA_data.zip"
 # obsData <- read_ebd(unz(obsFile))
 
@@ -42,17 +47,14 @@ obsFile <- "data/ebd_LA_2015-2025_all_spp.txt"
 
 ### Location
 
-Input the range of latitudes/longitudes, OR the state/country.
+Input the range of latitudes/longitudes, or leave as is to use all data from the state.
 
 ```{r}
 lonRange <- c(-94, -89.5) # Louisiana
 latRange <- c(29, 33.5) # Louisiana
 
-## ---- OR -------------------------------------------------------------
-
 countrySelect <- c("US") ## country code
 countryFull <- c("United States of America")
-# countryFull <- c("United States of America", "Canada", "Mexico")
 stateSelect <- c("LA")   ## state code
 stateCodes <- sapply(stateSelect, function(x) paste(countrySelect, x, sep="-")) 
 
@@ -60,37 +62,20 @@ stateCodes <- sapply(stateSelect, function(x) paste(countrySelect, x, sep="-"))
 
 Then choose either "state" or "lat.lon" so R knows which values to filter by:
 
-```{r}
-locType <- "state" ## "state" or "lat.lon"
-# locType <- "lat.lon" ## "state" or "lat.lon"
-```
 ### Species
 
-First, view all the species names:
-
 ```{r}
-print(table(obsData$common_name))
-spGrpName <- "Icteridae"
-```
-
-If your species contains lots of subspecies, or if you want to use a taxonomic group besides species, check this out: https://ebird.github.io/ebird-best-practices/ebird.html#sec-ebird-import-rollup. Check with me if you're unsure.
-
-Then, type the names you want below, in quotes, separated by commas. For filtering the data later, enter the *scientific name*. You will need to look these up. It probably goes without saying that the spelling and capitalization matter!
-
-Here, I have the scientific names of Common Grackle, Eastern Meadowlark, and Red-winged Blackbird:
-
-```{r}
-sppSelect <- c("Quiscalus quiscula", "Sturnella magna", "Agelaius phoeniceus")
+sppSelect <- c("Wilson's Plover")
 
 ```
 
 ### Date
 
-Leave blank if not sorting by date.
+Leave as is if not filtering by date.
 
 ```{r}
-dateStart <- ""
-dateEnd   <- ""
+dateStart <- "2015-01-01"
+dateEnd   <- "2025-01-01"
 ```
 
 ## Filter both datasets.
@@ -98,172 +83,53 @@ dateEnd   <- ""
 If the filter looks correct, type "Y" at the prompt to get R to apply it and then combine the two datasets (type ?semi_join in the console to see what it does) to get rid of any checklists that don't appear in both places. 
 
 ```{r}
+
+auk_ebd(file=obsFile, file_sampling=samplFile) |>
+  auk_date(date=c(dateStart, dateEnd)) |>
+  auk_species(species=sppSelect) |>
+  auk_bbox(bbox=c(lonRange[1], latRange[1],lonRange[2], latRange[2])) |>
+  auk_complete() |>
+  auk_filter(file=obsOut, file_sampling=samplOut, overwrite=TRUE) 
+  
 ```
+
+# CREATE DETECTION/NON-DETECTION DATA
+
+## Import the filtered data:
 
 ```{r}
-# source("load_filter_ebird_data.R")
-if (!nzchar(dateStart)) dateStart <- min(samplData$observation_date)
-if (!nzchar(dateEnd)) dateEnd <- max(samplData$observation_date)
-if (locType=="state"){
-  filt <- rlang::exprs(
-      state_code %in% stateCodes,
-      country_code %in% countrySelect,
-      between(observation_date, dateStart, dateEnd)
-    )
-} else if (locType=="lat.lon"){
-  filt <- rlang::exprs(
-      between(latitude, latRange[1], latRange[2]),
-      between(longitude, lonRange[1], lonRange[2]),
-      between(observation_date, dateStart, dateEnd)
-    )
-}
-invisible(lapply(filt, function(x) {
-           if (length(x)>3) {
-            cat("\n min",paste(x[[2]],eval(x[[3]]), sep=":"))
-            cat("\t max",paste(x[[2]],eval(x[[4]]), sep=":"))
-           } else {
-             cat("\n",paste(x[[2]], eval(x[[3]]), sep=":"))
-           }
-  }))
-
-if (params$prompt){
-  filterTrue <- readLine(prompt="Apply filter to data? (Type Y or N):")
-  filterTrue <- ifelse(filterTrue=="Y", TRUE, FALSE)
-} else {
-  filterTrue <- TRUE
-}
-
-if (filterTrue){
-  samplData <- samplData |> filter(all_species_reported) |> filter(!!!filt)
-  obsData <- obsData |> filter(all_species_reported) |> filter(!!!filt)
-  obsData <- semi_join(obsData, samplData, by="checklist_id")
-}
+obsData <- read_ebd(obsOut)
+samplData <- read_sampling(samplOut)
+print(str(obsData)) ## view a summary of the dataframe
 ```
-
-## Visualizations of entire dataset.
-
-```{r}
-
-```
-
-# CREATE COUNT DATA
-
-## Filter by species
-
-Filter to our chosen species:
-
-```{r}
-counts <- obsData |> 
-  filter( scientific_name %in% sppSelect) 
-print(table(counts$scientific_name)) ## you can see it worked 
-```
-
-## Calculate other variables.
-
-To get the time since sunrise, we first get the timezone from the latitude and longitude, then calculate the sunrise time and how many minutes passed between sunrise and the start time (minPastSunrise). We also might want to use year or month as a separate variable.
-
-```{r}
-
-counts <- counts |> 
-  rowwise() |>
-  mutate(timeZone = tz_lookup_coords(lat=latitude, lon=longitude),
-         start = as.POSIXct(paste(observation_date,time_observations_started, sep=" "), tz=timeZone), 
-         end   = start + minutes(duration_minutes),
-         year  = format(start, "%Y"),
-         month = format(start, "%b"),
-         date  = format(start, "%d-%b"),
-         sunr  = getSunlightTimes(observation_date,latitude,longitude,tz=timeZone)$sunrise,
-         minPastSunrise = as.numeric(round(difftime(start, sunr, units="mins")))
-  ) 
-```
-
-
-## Calculate effort variables.
-
-These are from https://ebird.github.io/ebird-best-practices/ebird.html
-
-```{r}
-# function to convert time observation to hours since midnight
-time_to_decimal <- function(x) {
-  x <- hms(x, quiet = TRUE)
-  hour(x) + minute(x) / 60 + second(x) / 3600
-}
-
-det <- det |> 
-  mutate(
-    # convert count to integer and X to NA (ignore warning "NAs introduced by coercion")
-    observation_count = as.integer(observation_count),
-    # effort_distance_km to 0 for stationary counts
-    effort_distance_km = if_else(protocol_type == "Stationary", 
-                                 0, effort_distance_km),
-    # convert duration to hours
-    effort_hours = duration_minutes / 60,
-    # speed km/h
-    effort_speed_kmph = effort_distance_km / effort_hours,
-    # convert time to decimal hours since midnight
-    hours_of_day = time_to_decimal(time_observations_started),
-  ) 
-```
-
-You probably got an error that 'protocol_type' was not found! If you check the data under "Session", you can see what the variable name should be. Change it above to make the code work.
-
-## Filter effort to get better comparisons.
-
-The amount of effort (time and/or distance) is directly correlated with detectability (more info at the link above).
-
-*Question: why would we want to use observations where species detectability is similar? Think about what might happen if we didn't*
-
-So, to be sure we are comparing data with similar detection probability, we can filter by effort. These are the effort filter values recommended by eBird. 
-
-*Question: what does this filter do to our data? In other words, what values are we keeping?*
-
-```{r}
-det <- det |>
-    filter(protocol_name %in% c("Stationary", "Traveling"),
-         effort_hours <= 6,
-         effort_distance_km <= 10,
-         effort_speed_kmph <= 100,
-         number_observers <= 10)
-```
-
-## Visualize the filtered data.
-
-```{r}
-
-```
-
-# CREATE DETECTION DATA
 
 ## Zero-filling
 
 To make these data into detection/non-detection data, we need to zero-fill them. Recall what zero-filling does from lecture. We end up with a column "species_observed", which has values of TRUE or FALSE.
 
+***ANSWER***
+Why does the sampling data have so many more rows than the observation data?
+
 ```{r}
 det <- auk_zerofill(obsData, samplData, collapse=TRUE)
 ```
 
-## Filter by species
 
-```{r eval=FALSE include=FALSE}
-det <- det |> 
-  filter( scientific_name %in% sppSelect) 
-```
-
-## Calculate time variables.
+## Calculate time variables (might take a while).
 
 ```{r}
 
 det <- det |> 
   rowwise() |>
-  mutate(timeZone = tz_lookup_coords(lat=latitude, lon=longitude),
+  mutate(timeZone = "America/Chicago",
          start = as.POSIXct(paste(observation_date,time_observations_started, sep=" "), tz=timeZone), 
          end   = start + minutes(duration_minutes),
          year  = format(start, "%Y"),
          month = format(start, "%b"),
          date  = format(start, "%d-%b"),
-         yearDay  = format(start, "%j"),
-         sunr  = getSunlightTimes(observation_date,latitude,longitude,tz=timeZone)$sunrise,
-         minPastSunrise = as.numeric(round(difftime(start, sunr, units="mins")))
+         yearDay  = format(start, "%j")#,
+        #  sunr  = getSunlightTimes(observation_date,latitude,longitude,tz=timeZone)$sunrise,
+        #  minPastSunrise = as.numeric(round(difftime(start, sunr, units="mins")))
   ) 
 ```
 
@@ -312,8 +178,6 @@ det <- det |>
          number_observers)
 
 ```
-
-**R NOTE** The 4 code blocks above are almost identical to the code we ran under "CREATE COUNT DATA". Instead of typing it twice, we COULD create function(s) to do the same tasks and only have to type the code once. Then we just have one line of code to call to function, rather than copying over all these lines and changing the names slightly.
 
 # MAP THE DETECTION DATA
 
@@ -367,6 +231,14 @@ legend("bottomright", bty = "n",
        legend = c("eBird checklist", legendTxt),
        pch = 19)
 box()
+```
+
+```{r}
+
+```
+
+
+```{r}
 ```
 
 ```{r}

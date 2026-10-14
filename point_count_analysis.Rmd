@@ -41,6 +41,7 @@ library(gt)
 library(lubridate)
 library(suncalc)
 library(tidyverse)
+library(readr)
 ```
 
 ### 2. Read in the data and examine for inconsistencies:
@@ -62,8 +63,11 @@ I fixed the longitudes that were not negative (the points were in Tibet!), but t
 nm <- c("date", "init", "lat", "lon", "treeDist", "shrubDist", "buildDist", "roadDist", 
         "waterDist", "habitat", "temp", "wind", "cloud", "start", "numCats", "numPpl", 
         "numCars", "species", "count", "sex", "birdDist", "minute", "notes")
+input <- "Indices"
 
-files <- list.files(pattern="\\.csv$") # list of all csv files in directory
+patt <- sprintf("BBS_Core_%s_1966-2023.csv$", input)
+files <- list.files(path = "data",pattern=patt, full.names=TRUE) # list of all csv files in directory
+print(files)
 countsDat <- read_csv(files, skip=1,col_names=nm) # read the csv files into a dataframe
 
 cat("\n\n>>> Variable (column) names:\n")
