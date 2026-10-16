@@ -53,3 +53,5 @@ other/
 *.out
 ebd_LA_data/
 ebd_LA_filtered*
+*.png
+det.gpkg

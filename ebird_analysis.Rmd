@@ -20,12 +20,14 @@ library(rnaturalearth)
 library(sf)
 library(gridExtra)
 library(readr)
+library(ggplot2)
 
 if (!exists("params")) {
   params <- list(
     "prompt" = TRUE
   ) 
 }
+suf=1
 ```
 
 ## Enter file names for the observations and sampling data:
@@ -45,28 +47,34 @@ obsOut <- "data/ebd_LA_filtered_sampling.txt"
 
 ## Input your filter values. 
 
+These are the species you can choose from:
+
 ### Location
 
 Input the range of latitudes/longitudes, or leave as is to use all data from the state.
 
 ```{r}
-lonRange <- c(-94, -89.5) # Louisiana
-latRange <- c(29, 33.5) # Louisiana
+# lonRange <- c(-94, -89.2) # Louisiana
+# latRange <- c(29, 33.5) # Louisiana
+
+## Cropping the map doesn't entirely work...
+lonRange <- c(-94, -89.2) # South Louisiana
+latRange <- c(29, 31) # South Louisiana
 
 countrySelect <- c("US") ## country code
 countryFull <- c("United States of America")
-stateSelect <- c("LA")   ## state code
-stateCodes <- sapply(stateSelect, function(x) paste(countrySelect, x, sep="-")) 
+stateSelect <- "LA"   ## state code
+stateCode <-  paste(countrySelect, stateSelect, sep="-") 
 
 ```
-
-Then choose either "state" or "lat.lon" so R knows which values to filter by:
 
 ### Species
 
 ```{r}
-sppSelect <- c("Wilson's Plover")
-
+# sppSelect <- c("Wilson's Plover")
+# spName <- "Wilson's Plover"  ## this name is for the plot legend
+sppSelect <- c("Yellow-throated Warbler","Common Yellowthroat")
+spName <- "Warbler"  ## this name is for the plot legend
 ```
 
 ### Date
@@ -101,17 +109,25 @@ auk_ebd(file=obsFile, file_sampling=samplFile) |>
 obsData <- read_ebd(obsOut)
 samplData <- read_sampling(samplOut)
 print(str(obsData)) ## view a summary of the dataframe
+sppSci <- sapply(sppSelect, function(x) unique(obsData$scientific_name[obsData$common_name==x]))
 ```
+
+-----------------------------------------------------------------------------------------------------
+*** QUESTION 1. ************************************************************************************
+
+Why does the sampling dataframe have so many more rows than the observation dataframe?
+
+
+-----------------------------------------------------------------------------------------------------
 
 ## Zero-filling
 
 To make these data into detection/non-detection data, we need to zero-fill them. Recall what zero-filling does from lecture. We end up with a column "species_observed", which has values of TRUE or FALSE.
 
-***ANSWER***
-Why does the sampling data have so many more rows than the observation data?
-
 ```{r}
-det <- auk_zerofill(obsData, samplData, collapse=TRUE)
+det1 <- auk_zerofill(obsData, samplData, collapse=TRUE)
+rm(obsData)
+rm(samplData)
 ```
 
 
@@ -119,10 +135,10 @@ det <- auk_zerofill(obsData, samplData, collapse=TRUE)
 
 ```{r}
 
-det <- det |> 
-  rowwise() |>
-  mutate(timeZone = "America/Chicago",
-         start = as.POSIXct(paste(observation_date,time_observations_started, sep=" "), tz=timeZone), 
+det <- det1 |> 
+  # rowwise() |>
+  mutate(
+         start = as.POSIXct(paste(observation_date,time_observations_started, sep=" "), tz="America/Chicago"), 
          end   = start + minutes(duration_minutes),
          year  = format(start, "%Y"),
          month = format(start, "%b"),
@@ -145,6 +161,7 @@ time_to_decimal <- function(x) {
 det <- det |> 
   mutate(
     # convert count to integer and X to NA (ignore warning "NAs introduced by coercion")
+        #  count_chr = observation_count,
     observation_count = as.integer(observation_count),
     # effort_distance_km to 0 for stationary counts
     effort_distance_km = if_else(protocol_type == "Stationary", 
@@ -158,6 +175,14 @@ det <- det |>
   ) 
 ```
 
+-----------------------------------------------------------------------------------------------------
+*** QUESTION 2. ************************************************************************************
+
+Explain why the code above didn't run and what you did to fix it:
+
+
+-----------------------------------------------------------------------------------------------------
+
 ## Filter effort to get better comparisons.
 
 ```{r}
@@ -168,7 +193,7 @@ det <- det |>
          effort_speed_kmph <= 100,
          number_observers <= 10)
 det <- det |>
-  select(checklist_id, observer_id,
+  select(checklist_id, observer_id, scientific_name,
          observation_count, species_observed, 
          state_code, locality_id, latitude, longitude,
          protocol_name, all_species_reported,
@@ -178,6 +203,14 @@ det <- det |>
          number_observers)
 
 ```
+
+-----------------------------------------------------------------------------------------------------
+*** QUESTION 3. ************************************************************************************
+
+In your own words, what is effort? Why do we care about it?
+
+
+-----------------------------------------------------------------------------------------------------
 
 # MAP THE DETECTION DATA
 
@@ -192,45 +225,108 @@ stProvBound <-  read_sf("data/gis-data.gpkg", "ne_state_lines") |>
       st_geometry()
 ctryBound <- read_sf("data/gis-data.gpkg", "ne_country_lines") |> 
       st_geometry()
-studyArea <- read_sf("data/gis-data.gpkg", "ne_states") |> 
+stateArea <- read_sf("data/gis-data.gpkg", "ne_states") |> 
   # filter(state_code %in% stateCodes) |>
-  filter(state_code == "US-AL") |>
+  filter(state_code == stateCode) |>
       st_geometry()
 
-detections_sf <- det |>
+```
+
+```{r}
+# table(det$scientific_name, useNA="ifany")
+# det3 <- det |> filter(is.na(observation_count))
+sppLevel <- c("none", "S.dominica", "G.trichas", "G.trichas&S.dominica" )
+if(length(sppSci)>1){
+  det2 <- det |>
+    mutate( sci_name = sub("^(\\w)\\w*\\s+(\\w+).*", "\\1.\\2", scientific_name, perl = TRUE)) |>
+    ## NA just means no count, so count it with "present"
+    mutate(species_name = ifelse(is.na(observation_count) | observation_count>0,sci_name,"")) |>
+    # mutate(species_name = na.omit(if_else(is.na(observation_count) | observation_count>0,NA_character_,sci_name))) |>
+    # mutate(species_name = ifelse(observation_count>0,paste(scientific_name, collapse="_"),"")) |>
+    group_by(checklist_id) |>
+    # print(species_name)
+    mutate(
+      # species_present = ifelse(species_observed==FALSE, "none", paste(species_name, collapse=" "))
+      species_present = ifelse(species_observed==FALSE, "none", paste(species_name[nzchar(species_name)], collapse="&"))
+      # species_present = ifelse(species_observed==FALSE, "none",toString(species_name[nzchar(species_name)]))
+      # species_present = case_when(species_observed==FALSE ~ "none",
+    #                               scientific_name==sppSci[1] ~
+      ) |>
+    mutate(species_present=factor(species_present,levels=sppLevel)) |>
+        ungroup()
+    #   )# |>
+    # mutate()
+    # ))
+    # select(species_observed, scientific_name) |> 
+    print(table(det2$species_name, useNA="ifany"))
+    print(table(det2$species_present, useNA="ifany"))
+    print(table(det2$observation_count, useNA="ifany"))
+}
+
+bbox1 <- st_bbox(c(xmin=lonRange[1],xmax=lonRange[2],ymin=latRange[1],ymax=latRange[2]), crs=st_crs(4326))
+detections_sf <- det2 |>
   st_as_sf(coords = c("longitude", "latitude"), crs = 4326) |> 
-  select(species_observed)
+  # st_crop(xmin=lonRange[1], xmax=lonRange[2], ymin=latRange[1], ymax=latRange[2]) |>
+  st_crop(bbox1) |>
+  select(species_present)
+
+## Optional: save to file so you can load it more quickly in future
+if (FALSE){
+  st_write(detections_sf, "data/det.gpkg")
+}
+```
+
+```{r}
+if (!exists("detections_sf")) detections_sf <- read_sf("data/det.gpkg")
+# bbox <- bbox1 * rep(c(1.0005, 1.00005), 2)
+bbox <- bbox1 
+xlims <- c(bbox[1], bbox[3])
+ylims <- c(bbox[2], bbox[4])
+bbox_w <- (bbox$xmax - bbox$xmin)
+bbox_h <- (bbox$ymax - bbox$ymin)
+# bbox_asp <- (bbox$ymax - bbox$ymin) / (bbox$xmax - bbox$xmin)
+bbox_asp <- bbox_h / bbox_w
 ```
 
 ```{r}
 
+colorList <- c(
+  # "S.dominica" = "#dfbe08",
+  "S.dominica" = "#fcb721",
+  # "G.trichas" = "#b6b315",
+  "G.trichas" = "#eeeb42",
+  "G.trichas&S.dominica" = "#369733"
+# noColor = "#998585"
+  # "none" = "#e3e5ec"
+  # noColor = "#807474"
+)
+dir.create("out") ## will warn if already exists; you can ignore
+now <- format(Sys.Date(),format="_%d-%b")
 plTitle <- ""
-bbox <- st_bbox(studyArea)
-plot(st_geometry(detections_sf),
-     xlim=c(bbox[3], bbox[1]),
-     ylim=c(bbox[2], bbox[4]),
-     main=plTitle, col=NA, border=NA)
+print(levels(detections_sf$species_present))
+```
 
-plot(landMap, col = "#cfcfcf", border = "#888888", lwd = 0.5, add = TRUE)
-plot(studyArea, col = "#e6e6e6", border = NA, add = TRUE)
-plot(stProvBound, col = "#ffffff", lwd = 0.75, add = TRUE)
-plot(ctryBound, col = "#ffffff", lwd = 1.5, add = TRUE)
-yesColor <- "#4daf4a"
-noColor <- "#998585"
-plot(filter(detections_sf, !species_observed),
-     pch = 19, cex = 0.2, col = alpha(noColor, 0.35),
-     add = TRUE)
-# observed
-plot(filter(detections_sf, species_observed),
-     pch = 19, cex = 0.3, col = alpha(yesColor, 1),
-     add = TRUE)
-# legend
-legendTxt <- sprintf("Sighting of %s", spGrpName)
-legend("bottomright", bty = "n",
-       col = c(noColor, yesColor),
-       legend = c("eBird checklist", legendTxt),
-       pch = 19)
-box()
+We will plot the non-detections as a separate layer to be sure our detection points plot on top.
+
+```{r}
+fname <- sprintf("out/occurrence_map_%s%s.png", suf, now)
+# sppPlot <- ggplot(detections_sf) +
+sppPlot <- ggplot() +
+  geom_sf(data=landMap, fill = "#cfcfcf") +
+  geom_sf(data=stateArea, fill = "#e6e6e6") +
+  geom_sf(data=filter(detections_sf,species_present=="none"), color="#c8caca", size=0.2, alpha=0.2) +
+  geom_sf(data=filter(detections_sf,species_present!="none"), aes(color=species_present), size=0.3, alpha=0.6) +
+  coord_sf(xlim=xlims, ylim=ylims, expand=FALSE) +
+  scale_color_manual(values=colorList) +
+  theme_minimal() +
+  theme(
+    panel.background = element_rect(fill = "skyblue", color = NA)
+    # plot.background = element_rect(fill = "navy", color = NA)
+  )
+
+ggsave(fname, plot=sppPlot)
+
+suf <- suf+1
 ```
 
 ```{r}
