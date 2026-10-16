@@ -21,6 +21,7 @@ library(sf)
 library(gridExtra)
 library(readr)
 library(ggplot2)
+library(ggtext)
 
 if (!exists("params")) {
   params <- list(
@@ -221,6 +222,8 @@ Prepare the GIS data & the observations:
 ```{r}
 landMap <- read_sf("data/gis-data.gpkg", "ne_land") |> 
     st_geometry()
+riverLines <- read_sf("data/gis-data.gpkg", "ne_rivers") |> 
+    st_geometry()
 stProvBound <-  read_sf("data/gis-data.gpkg", "ne_state_lines") |> 
       st_geometry()
 ctryBound <- read_sf("data/gis-data.gpkg", "ne_country_lines") |> 
@@ -288,6 +291,10 @@ bbox_h <- (bbox$ymax - bbox$ymin)
 bbox_asp <- bbox_h / bbox_w
 ```
 
+### PLOTTING
+
+Customize the plot colors and text:
+
 ```{r}
 
 colorList <- c(
@@ -295,11 +302,15 @@ colorList <- c(
   "S.dominica" = "#fcb721",
   # "G.trichas" = "#b6b315",
   "G.trichas" = "#eeeb42",
-  "G.trichas&S.dominica" = "#369733"
+  "G.trichas&S.dominica" = "#369733",
 # noColor = "#998585"
   # "none" = "#e3e5ec"
   # noColor = "#807474"
+  "nondetect" = "#7a767c"
 )
+stateColor <- "#d7dae0"
+grpLabels <- c("S. dominica", "G. trichas", "Both", "Neither")
+# grpLabels <- c("*S. dominica*", "*G. trichas*", "Both", "Neither")
 dir.create("out") ## will warn if already exists; you can ignore
 now <- format(Sys.Date(),format="_%d-%b")
 plTitle <- ""
@@ -312,15 +323,20 @@ We will plot the non-detections as a separate layer to be sure our detection poi
 fname <- sprintf("out/occurrence_map_%s%s.png", suf, now)
 # sppPlot <- ggplot(detections_sf) +
 sppPlot <- ggplot() +
-  geom_sf(data=landMap, fill = "#cfcfcf") +
-  geom_sf(data=stateArea, fill = "#e6e6e6") +
-  geom_sf(data=filter(detections_sf,species_present=="none"), color="#c8caca", size=0.2, alpha=0.2) +
-  geom_sf(data=filter(detections_sf,species_present!="none"), aes(color=species_present), size=0.3, alpha=0.6) +
+  geom_sf(data=landMap, fill = "#b9bbc2") +
+  geom_sf(data=stateArea, fill = stateColor) +
+  geom_sf(data=stProvBound, color = "#ffffff") +
+  geom_sf(data=ctryBound, color = "#ffffff") +
+  geom_sf(data=riverLines, color = "skyblue2") +
+  geom_sf(data=filter(detections_sf,species_present=="none"), aes(color="nondetect"), size=0.1, alpha=0.1) +
+  geom_sf(data=filter(detections_sf,species_present!="none"), aes(color=species_present), size=0.2, alpha=0.3) +
   coord_sf(xlim=xlims, ylim=ylims, expand=FALSE) +
-  scale_color_manual(values=colorList) +
+  scale_color_manual(name = "eBird detections",values=colorList, labels=grpLabels) +
   theme_minimal() +
+  guides(color = guide_legend(override.aes = list(size = 2, alpha=0.6))) +
   theme(
-    panel.background = element_rect(fill = "skyblue", color = NA)
+        legend.background = element_rect(fill=stateColor),
+        panel.background = element_rect(fill = "skyblue", color = NA)
     # plot.background = element_rect(fill = "navy", color = NA)
   )
 
